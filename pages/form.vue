@@ -19,47 +19,22 @@ const formData = ref({
   businessLocation: '',
 })
 const hasError = ref(false);
+const appData = useAppDataStore()
 // handle the form
 const handleForm = ()=> {
-  console.log('Hi', formData)
+  console.log(formData)
 }
-
-const  getYearsArray = ()=>{
-  const currentYear = new Date().getFullYear();
-  const startYear = 1984;
-  const yearsArray = [];
-  for (let year = startYear; year <= 2006; year++) {
-    yearsArray.push(year);
-  }
-  return yearsArray;
-}
-const eduLevels = [
-  'Primary School',
-  'Secondary School',
-  'Certificate',
-  'Diploma',
-  'Bachellor',
-  'Masters',
-]
-const economySector = [
-  'E-commerce',
-  'Fin Tech',
-  'Edu Tech',
-  'Agro Tech',
-  'Health Tech',
-  'Artificial Intelligence',
-]
-
 </script>
 
 <template>
 <!-- Start  Form -->
 <section class="contact-area pt-100 pb-100">
     <div class="container">
+      <progress-bar />
         <div class="row">
             <div class="col-lg-9">
                 <div class="contact-form">
-                    <h2>Application Form <span>1</span></h2>
+                    <h2>Personal Profile</h2>
                     <form id="contact-form" @submit.prevent="handleForm()">
                         <div class="row">
                             <div class="col-md-6">
@@ -71,7 +46,7 @@ const economySector = [
                               <label for="birthYear">Birth Year</label>
                               <select v-model="formData.birthYear" id="birthYear">
                                 <option value="none" disabled>Choose birth Year</option>
-                                <option v-for="year in getYearsArray()" 
+                                <option v-for="year in appData.getYearsArray" 
                                 :key="year">{{year}}</option>
                               </select>                            
                             </div>
@@ -84,7 +59,7 @@ const economySector = [
                               <label for="educationLevel">Education Level</label>
                               <select v-model="formData.educationLevel" id="educationLevel">
                                 <option value="none" disabled>Choose Education Level</option>
-                                <option v-for="level in eduLevels" :key="level">{{level}}</option>
+                                <option v-for="level in appData.eduLevels" :key="level">{{level}}</option>
                               </select>                            
                             </div>
                             <div class="col-md-6">
@@ -119,7 +94,7 @@ const economySector = [
                                   <label for="businessSector">Business Sector</label>
                                   <select v-model="formData.businessSector" id="businessSector">
                                     <option value="none" disabled>Choose Economic Sector</option>
-                                    <option v-for="sector in economySector" :key="sector">{{sector}}</option>
+                                    <option v-for="sector in appData.economySector" :key="sector">{{sector}}</option>
                                   </select>                                    
                               </div>
                             </template>
@@ -139,6 +114,7 @@ const economySector = [
             </div>
             <!-- Contact Form Sidebar -->
             <div class="col-lg-3">
+              <circular-progress />
                 <div class="contact-detail">
                     <h2>Our contact details</h2>
                     <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p> -->

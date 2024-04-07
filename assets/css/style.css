@@ -246,6 +246,10 @@ textarea:focus {
     font-weight: 900;
     line-height: 1;
 }
+.logo img {
+    height: 128px;
+    height: 64px;
+}
 
 .logo h2 a {
     color: #378af6;

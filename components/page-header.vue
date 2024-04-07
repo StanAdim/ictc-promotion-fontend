@@ -10,7 +10,11 @@
                 <div class="col-lg-3">
                     <div class="logo">
                         <h2>
-                          <nuxt-link to="/">ICTC | SIDO</nuxt-link>
+                          <!-- <nuxt-link to="/">ICTC | SIDO</nuxt-link> -->
+                        <nuxt-link to="/">
+                            <img src="/logo/ictc.png" alt="">
+                            <img src="/logo/sido.png" alt="">
+                        </nuxt-link>
                         </h2>
                     </div>
                    

@@ -1,10 +1,32 @@
 export const useAppDataStore = defineStore('appData', () => {
-    const count = ref(0)
-    const name = ref('Eduardo')
-    const doubleCount = computed(() => count.value * 2)
-    function increment() {
-      count.value++
-    }
+  const eduLevels = [
+        'Primary School',
+        'Secondary School',
+        'Certificate',
+        'Diploma',
+        'Bachellor',
+        'Masters',
+      ];
+
+    const economySector = [
+      'E-commerce',
+      'Fin Tech',
+      'Edu Tech',
+      'Agro Tech',
+      'Health Tech',
+      'Artificial Intelligence',
+    ];
+
+    const getYearsArray = computed(() => {
+      // const currentYear = new Date().getFullYear();
+      const startYear = 1984;
+      const yearsArray = [];
+      for (let year = startYear; year <= 2006; year++) {
+        yearsArray.push(year);
+      }
+      return yearsArray;
+    })
+
   
-    return { count, name, doubleCount, increment }
+    return { eduLevels, economySector, getYearsArray }
   })

@@ -2,7 +2,7 @@
 definePageMeta({
   layout: 'default',
 }) 
-
+const appData = useAppDataStore()
 
 </script>
 

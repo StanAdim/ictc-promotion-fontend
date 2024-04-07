@@ -21,7 +21,8 @@ export default defineNuxtConfig({
       ],
       link: [
         // <link rel="stylesheet" href="https://myawesome-lib.css">
-        // { rel: 'stylesheet', href: 'https://awesome-lib.css' }
+        // { rel: 'ico', href: '/public/logo/ico.png' }
+        { rel: 'icon', type: 'image/x-icon', href: '/logo/ico.png' }
       ],
       // please note that this is an area that is likely to change
       style: [
