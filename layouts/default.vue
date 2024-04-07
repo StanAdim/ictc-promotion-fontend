@@ -17,4 +17,5 @@
 @import url('~/assets/css/owl.carousel.min.css');
 @import url('~/assets/css/owl.theme.default.min.css');
 @import url('~/assets/css/responsive.css');
+@import url('~/assets/css/custom.style.css');
 </style>

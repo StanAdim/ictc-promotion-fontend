@@ -1,12 +1,55 @@
 <script lang="ts" setup>
-const formData = {
-  name: ''
-}
-const hasError = ref(true);
+
+definePageMeta({
+  layout: 'default',
+}) 
+useHead({
+  title:'Incubation Form'
+})
+const formData = ref({
+  fullName: '',
+  birthYear: 'none',
+  nidaNumber: '',
+  educationLevel: 'none',
+  BusinessRegStatus: '0',
+  phoneNumber: '',
+  email: '',
+  businessSector: 'none',
+  businessName: '',
+  businessLocation: '',
+})
+const hasError = ref(false);
 // handle the form
 const handleForm = ()=> {
   console.log('Hi', formData)
 }
+
+const  getYearsArray = ()=>{
+  const currentYear = new Date().getFullYear();
+  const startYear = 1984;
+  const yearsArray = [];
+  for (let year = startYear; year <= 2006; year++) {
+    yearsArray.push(year);
+  }
+  return yearsArray;
+}
+const eduLevels = [
+  'Primary School',
+  'Secondary School',
+  'Certificate',
+  'Diploma',
+  'Bachellor',
+  'Masters',
+]
+const economySector = [
+  'E-commerce',
+  'Fin Tech',
+  'Edu Tech',
+  'Agro Tech',
+  'Health Tech',
+  'Artificial Intelligence',
+]
+
 </script>
 
 <template>
@@ -14,36 +57,78 @@ const handleForm = ()=> {
 <section class="contact-area pt-100 pb-100">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-9">
                 <div class="contact-form">
-                    <h2>Get in touch</h2>
+                    <h2>Application Form <span>1</span></h2>
                     <form id="contact-form" @submit.prevent="handleForm()">
                         <div class="row">
                             <div class="col-md-6">
-                              <label for="">Enter</label>
-                                <input type="text" v-model="formData.name" placeholder="Your name">
+                              <label for="fullName">Applicant Full Name</label>
+                                <input type="text" 
+                                v-model="formData.fullName" id="fullName" placeholder="Your name">
                             </div>
                             <div class="col-md-6">
-                              <label for="">Enter</label>
-                                <input type="email" v-model="formData.name" placeholder="Your Email">
+                              <label for="birthYear">Birth Year</label>
+                              <select v-model="formData.birthYear" id="birthYear">
+                                <option value="none" disabled>Choose birth Year</option>
+                                <option v-for="year in getYearsArray()" 
+                                :key="year">{{year}}</option>
+                              </select>                            
+                            </div>
+                            <div class="col-md-6">
+                              <label for="nidaNumber">Nida Number</label>
+                                <input type="text" id="nidaNumber"
+                                v-model="formData.nidaNumber" placeholder="Your name">
+                            </div>
+                            <div class="col-md-6">
+                              <label for="educationLevel">Education Level</label>
+                              <select v-model="formData.educationLevel" id="educationLevel">
+                                <option value="none" disabled>Choose Education Level</option>
+                                <option v-for="level in eduLevels" :key="level">{{level}}</option>
+                              </select>                            
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phoneNumber">Phone Number</label>
+                                <input type="text" id="phoneNumber"
+                                 v-model="formData.phoneNumber" placeholder="+255..">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email">E-mail</label>
+                                <input type="text" id="email"
+                                v-model="formData.email" placeholder="Your Email">
                             </div>
                             <div class="col-md-12">
-                              <label for="">Enter</label>
-                                <input type="text" v-model="formData.name" placeholder="Your Subjects">
-                            </div>
-                            <div class="col-md-12">
-                              <label for="">Enter</label>
-                              <select v-model="formData.name" id="">
-                                <option value="">Hello</option>
-                                <option value="">Change</option>
+                              <label for="BusinessRegStatus">Business Registration Status</label>
+                              <select v-model="formData.BusinessRegStatus" id="BusinessRegStatus">
+                                <option value="0">NO</option>
+                                <option value="1">YES</option>
                               </select>
                             </div>
-                            <div class="col-md-12">
-                              <label for="">Enter</label>
-                                <textarea v-model="formData.name" placeholder="Write Your Message"></textarea>
-                            </div>
+                            <template v-if="formData.BusinessRegStatus === '1' ">
+                              <div class="col-md-4">
+                                <label for="businessName">Business Name</label>
+                                <input type="text" id="businessName"
+                                v-model="formData.businessName" placeholder="Business Name">
+                              </div>
+                              <div class="col-md-4">
+                                <label for="businessLocation">Business Location</label>
+                                <input type="text" id="businessLocation"
+                                v-model="formData.businessLocation" placeholder="Business Location">
+                              </div> 
+                              <div class="col-md-4">
+                                  <label for="businessSector">Business Sector</label>
+                                  <select v-model="formData.businessSector" id="businessSector">
+                                    <option value="none" disabled>Choose Economic Sector</option>
+                                    <option v-for="sector in economySector" :key="sector">{{sector}}</option>
+                                  </select>                                    
+                              </div>
+                            </template>
+                            <!-- <div class="col-md-12">
+                              <label for="">Business Economy Sector</label>
+                                <textarea v-model="formData.name" placeholder="Write out"></textarea>
+                            </div> -->
                             <div class="col-12">
-                                <button class="button-1" type="submit">Send Message</button>
+                                <button class="button-1" type="submit">Next</button>
                             </div>
                         </div>
                     </form>
@@ -53,38 +138,29 @@ const handleForm = ()=> {
                 </div>
             </div>
             <!-- Contact Form Sidebar -->
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="contact-detail">
                     <h2>Our contact details</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p>
+                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p> -->
                     <div class="contact-detail-list">
                         <ul>
                             <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>address</span>
-                                <small>112 Strina, lite House</small>
+                                <span>Phone</span>
+                                <small>+255 738 424 217</small><br>
+                                <small>+255 738 424 217</small>
                             </li>
                             <li>
-                                <i class="fas fa-phone-volume"></i>
-                                <span>phone</span>
-                                <a href="#">+00 132 369</a>
-                                <a href="#">+88 164 518</a>
+                                <span>Email</span>
+                                <small>ictsupport@ictc.go.tz</small><br>
+                                <small>info@ictc.go.tz</small>
                             </li>
-                            <li>
-                                <i class="far fa-envelope"></i>
-                                <span>email</span>
-                                <a href="#">example@gmail.com</a>
-                                <a href="#">info@example.com</a>
-                            </li>
+
+
                         </ul>
                     </div>
                     <!-- Follow area -->
                     <ul class="social-link">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        <li><a href="#"><i class="fab fa-pinterest"></i></a></li>
+                        <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
                     </ul>
                 </div>
             </div>

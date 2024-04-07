@@ -1,4 +1,10 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+definePageMeta({
+  layout: 'default',
+}) 
+
+
+</script>
 
 <template>
     <!-- Start Main Area -->
@@ -11,12 +17,15 @@
                     <div class="col-lg-6">
                         <div class="hero-caption">
                             <div class="hero-caption-full pt-100">
-                                <h2>Create Servers in Less Than 60 Seconds </h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget volutpat tortor. Cras libero nisl, auctor non nunc eget, pharetra ultrices eros. </p>
-                                <div class="hero-btn mt-30">
-                                  <nuxt-link to="/form" class="button-1">Register Now</nuxt-link>
+                                <h2>INNOVATIVE IDEAS</h2>
+                                <h2>MAWAZO BUNIFU</h2>
+                                <!-- <p>Dar es salaam</p> -->
+                                <p>Application for individuals with Innovative Ideas to participate in SIDO incubation Program.</p>
+                                <p>Application deadline <span class="deadline">April 15th, 2024</span></p>
+                                  <div class="hero-btn mt-30">
+                                    <nuxt-link to="/form" class="button-1">Apply Now</nuxt-link>
                                     <!-- <a class="button-1" href="#">Get Started</a> -->
-                                    <!-- <a class="button-2" href="#">Contact Us</a> -->
+                                    <a class="button-2" href="#programe-info">Read More</a>
                                 </div>
                             </div>
                         </div>
@@ -30,47 +39,9 @@
             </div>
         </section>
         <!-- End Hero Area -->
-        <!-- Start Cloud Services Area -->
-        <section class="cloud-service-area pt-100 pb-70">
-            <div class="container">
-                <div class="row">
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="cloud-service-single one mb-30">
-                            <div class="icon">
-                                <img src="assets/img/icon/service-1.svg" alt="cloud">
-                            </div>
-                            <div class="text">
-                                <h5>Unlimited Scale Up and Scale Out</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="cloud-service-single two mb-30">
-                            <div class="icon">
-                                <img src="assets/img/icon/service-2.svg" alt="cloud">
-                            </div>
-                            <div class="text">
-                                <h5>Simple Management Console and API</h5>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Single -->
-                    <div class="col-lg-4 col-md-6">
-                        <div class="cloud-service-single three mb-30">
-                            <div class="icon">
-                                <img src="assets/img/icon/service-3.svg" alt="cloud">
-                            </div>
-                            <div class="text">
-                                <h5>Premium Human Support 24/7</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- End Cloud Services Area -->
+        <!-- StaArea -->
+       <mini-cards />
+        <!-- End Area -->
         <!-- Start About Section -->
         <section class="about-area pt-100 pb-100 section-bg">
             <div class="container">
@@ -81,20 +52,19 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="about-info">
-                            <h5>About Us</h5>
-                            <h2>Creative challenges are our passion</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi nunc sapien, pellentesque molestie feugiat ut, tempus id ligula. Integer malesuada tellus et ullamcorper sollicitudin. Sed mauris diam, scelerisque fermentum fermentum
-                                vitae, ullamcorper a arcu. Cras facilisis augue lectus. Mauris rhoncus, lectus vitae sodales pellentesque, augue metus dictum sem, a congue ante odio et erat.</p>
+                        <div class="about-info" id="programe-info">
+                            <h5>About This Programme</h5>
+                            <h3>Benefits:</h3>
+                            <p>Access to Working Spaces, Networking enviroment, Access to Financial linkages, Coaching and mentorship</p>
+                            <h3>Eligibility:</h3>
                             <ul>
-                                <li><font-awesome-icon icon="fas fa-check" /> Fusce ac lacus magna.</li>
-                                <li><i class="fas fa-check"></i> DoSoft Is Clean Modern Html template</li>
-                                <li><i class="fas fa-check"></i> Quisque sed volutpat enim.</li>
+                                <li><i class="fas fa-check"></i>Must be a Tanzanian aged 18 and above</li>
+                                <li><i class="fas fa-check"></i>Proposal not exceeding 3 pages (English/Swahili)</li>
+                                <li><i class="fas fa-check"></i>Innovator must have started (Prototype)</li>
+                                <li><i class="fas fa-check"></i>Areas of innovation (Value addition to products, technology, scancode Blue Economy)</li>
                             </ul>
-                            <p>Sed leo velit, semper vel faucibus sed, ullamcorper quis urna. Aenean pretium finibus faucibus. Proin luctus urna non ante ultrices volutpat. Aliquam cursus risus libero, eget iaculis mi dictum in.</p>
                             <div class="about-btn mt-30">
-                                <a class="button-1" href="#">Learn More</a>
-                                <a class="button-2" href="#">Read More</a>
+                                <a class="button-2" href="#">Learn More</a>
                             </div>
                         </div>
                     </div>

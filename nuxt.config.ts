@@ -1,10 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  modules: [
+    // ...
+    '@pinia/nuxt',
+  ],
   app: {
     head: {
+      title: 'ICTC - Promotion',
       meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+        { name: 'viewport', content: 'width=device-width, initial-scale=1', }
       ],
       script: [
         // {type:"text/javascript",src :"/js/script.js",},
