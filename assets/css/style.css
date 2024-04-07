@@ -2123,9 +2123,15 @@ textarea:focus {
     background: #ff7a7a;
     color: #fff;
 }
-
+.ajax-response {
+    padding: .4rem;
+    margin: .6rem .2rem;
+    color: #ff0000;
+    background-color: #ff00001d;
+}
 .contact-form {
     padding: 30px 15px;
+    background-color: #0098de16;
     box-sizing: border-box;
     box-shadow: 0px 0px 7px #fbe7e7;
     border-radius: 3px;
@@ -2133,33 +2139,41 @@ textarea:focus {
 
 .contact-form h2 {
     font-size: 25px;
+    text-align: center;
     text-transform: capitalize;
     font-weight: 600;
-    color: #000;
+    color: #317ea2;
     margin-bottom: 10px;
 }
-
-.contact-form input {
+.contact-form label {
+    margin-left: .4rem;
+    color: #5883a1;
+}
+.contact-form input, select{
+    color: #3f5f74;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: .4rem;
     border: 1px solid #ccc;
-    padding: 20px 20px;
+    border-radius: .4rem ;
+    padding:.6rem;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
 
-.contact-form input:focus {
-    border-color: #ff7a7a;
+.contact-form input:focus, select:focus {
+    border-color: #7ac1ff;
 }
 
 .contact-form textarea {
+    color: #7ac1ff;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom:.4rem;
     border: 1px solid #ccc;
-    padding: 20px 20px;
+    padding: .6rem;
+    border-radius: .4rem;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    height: 170px
+    height: 100px
 }
 
 .contact-form textarea:focus {
@@ -2168,6 +2182,8 @@ textarea:focus {
 
 .contact-form button {
     border: none;
+    border-radius: .35rem;
+    margin: .2rem;
 }
 
 /*

@@ -7,7 +7,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' }
       ],
       script: [
-        {type:"text/javascript",src :"/js/script.js",},
+        // {type:"text/javascript",src :"/js/script.js",},
         {type:"text/javascript",src :"/js/modernizr.min.js",},
         {type:"text/javascript",src :"/js/jquery-3.5.1.min.js",},
         {type:"text/javascript",src :"/js/popper.min.js",},

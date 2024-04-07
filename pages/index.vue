@@ -14,8 +14,9 @@
                                 <h2>Create Servers in Less Than 60 Seconds </h2>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget volutpat tortor. Cras libero nisl, auctor non nunc eget, pharetra ultrices eros. </p>
                                 <div class="hero-btn mt-30">
-                                    <a class="button-1" href="#">Get Started</a>
-                                    <a class="button-2" href="#">Contact Us</a>
+                                  <nuxt-link to="/form" class="button-1">Register Now</nuxt-link>
+                                    <!-- <a class="button-1" href="#">Get Started</a> -->
+                                    <!-- <a class="button-2" href="#">Contact Us</a> -->
                                 </div>
                             </div>
                         </div>
