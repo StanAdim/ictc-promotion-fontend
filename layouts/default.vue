@@ -4,6 +4,7 @@
   <div>
     <!-- Layout: default -->
     <page-header />
+    <loading-bars />
     <slot />
     <page-footer/>
   </div>

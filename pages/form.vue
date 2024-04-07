@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script  setup>
 
 definePageMeta({
   layout: 'default',
@@ -9,22 +9,31 @@ useHead({
 const formData = ref({
   fullName: '',
   birthYear: 'none',
-  nidaNumber: '',
+  nidaNumber: '12345678901234567890',
   educationLevel: 'none',
   BusinessRegStatus: '0',
-  phoneNumber: '',
+  phoneNumber: '255767941560',
   email: '',
   businessSector: 'none',
   businessName: '',
   businessLocation: '',
 })
 const hasError = ref(false);
+const validationError = ref(null);
 const appData = useAppDataStore()
 // handle the form
 const  handleForm = async ()=> {
-  const {data, error} = await useApiFetch("/api/hello");
+  await useApiFetch('/sanctum/csrf-cookie');
+  const {data, error} = await useApiFetch("/api/create-profile-application", {
+    method: 'post',
+    body: formData.value
+  });
 
-  console.log(data)
+  console.log(data,error.value?.data)
+  if( error.value?.data){
+    validationError.value = error.value?.data.errors
+    hasError.value = true;
+  }
 }
 </script>
 
@@ -110,7 +119,8 @@ const  handleForm = async ()=> {
                         </div>
                     </form>
                     <template v-if="hasError">
-                      <p class="ajax-response">Hello</p>
+                      <p class="ajax-response" v-for="error in validationError" 
+                      :key="error">{{error[0]}}</p>
                     </template>
                 </div>
             </div>
