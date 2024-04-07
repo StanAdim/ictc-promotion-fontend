@@ -23,7 +23,7 @@
                     <div class="menu">
                         <nav>
                             <ul>
-                                <li><nuxt-link to="/">Contact Us</nuxt-link></li>
+                                <li><nuxt-link to="/">About Us</nuxt-link></li>
                                 <!-- <li><a href="contact.html">Contact</a></li> -->
                             </ul>
                         </nav>

@@ -21,8 +21,10 @@ const formData = ref({
 const hasError = ref(false);
 const appData = useAppDataStore()
 // handle the form
-const handleForm = ()=> {
-  console.log(formData)
+const  handleForm = async ()=> {
+  const {data, error} = await useApiFetch("/api/hello");
+
+  console.log(data)
 }
 </script>
 
