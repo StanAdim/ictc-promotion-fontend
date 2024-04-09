@@ -1,10 +1,14 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const appData = useAppDataStore()
+
+</script>
 
 <template>
   <div>
     <!-- Layout: default -->
     <page-header />
-    <loading-bars />
+    <toasting-tip  message="toastingTip" />
+
     <slot />
     <page-footer/>
   </div>

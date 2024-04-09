@@ -1,60 +1,123 @@
-
 <template>
-    <div class="loading-container">
-        <div class="loader loader--style4" title="3">
-        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            width="24px" height="24px" viewBox="0 0 24 24" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-            <rect x="0" y="0" width="4" height="7" fill="#333">
-            <animateTransform  attributeType="xml"
-                attributeName="transform" type="scale"
-                values="1,1; 1,3; 1,1"
-                begin="0s" dur="0.6s" repeatCount="indefinite" />       
-            </rect>
-
-            <rect x="10" y="0" width="4" height="7" fill="#333">
-            <animateTransform  attributeType="xml"
-                attributeName="transform" type="scale"
-                values="1,1; 1,3; 1,1"
-                begin="0.2s" dur="0.6s" repeatCount="indefinite" />       
-            </rect>
-            <rect x="20" y="0" width="4" height="7" fill="#333">
-            <animateTransform  attributeType="xml"
-                attributeName="transform" type="scale"
-                values="1,1; 1,3; 1,1"
-                begin="0.4s" dur="0.6s" repeatCount="indefinite" />       
-            </rect>
-        </svg>
-</div>
-
+  <div class="loading">
+    <div class="arc">
     </div>
-    <!-- 4 -->
+    <h1><span>LOADING</span></h1>
+  </div>
 </template>
-
 <style scoped>
-.loading-container {
+@import url("https://fonts.googleapis.com/css?family=Inconsolata");
 
-  text-align: center;
-  font-family: "Gill sans", sans-serif;
-  margin: 0 auto;
+
+
+.loading {
+  margin: .3rem;
+  position: relative;
+  padding: .4rem;
+  top: 2.4rem;
+  height: 30vh;
+  background-color: #a8847437;
 }
 
-.loader {
-  margin: 0 0 2em;
+.arc {
+  margin: auto;
+  top: 10rem;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100px;
   height: 100px;
-  width: 20%;
+  border-radius: 50%;
+  border-top: 2px solid #29ff37;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  animation: rt .6s infinite linear;
+}
+.arc::before {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border-top: 2px solid #5429ff;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  animation: rt 2s infinite linear reverse;
+  content: "";
+}
+.arc::after {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border-top: initial;
+  border-left: initial;
+  border-right: initial;
+  animation: cw 1s infinite;
+  content: "";
+  background: #f67e4f}
+
+h1 {
+  position: absolute;
+  height: 40px;
+  font-weight: 600;
+  margin: auto;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-transform: uppercase;
   text-align: center;
-  padding: 1.4em;
-  margin: 0 auto 1em;
-  display: inline-block;
-  vertical-align: top;
+  letter-spacing: 0.1em;
+  font-size: 14px;
+  font-weight: lighter;
+  color: #714205;
+}
+h1 span {
+  display: none;
+}
+h1::after {
+  animation: txt 1.1s infinite;
+  content: "";
 }
 
-/*
-  Set the color of the icon
-*/
-svg path,
-svg rect {
-  fill: #ff6700;
+@keyframes rt {
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
+@keyframes cw {
+  0% {
+    width: 0;
+    height: 0;
+  }
+  75% {
+    width: 40px;
+    height: 40px;
+  }
+  100% {
+    width: 0;
+    height: 0;
+  }
+}
+@keyframes txt {
+  0% {
+    content: "LOADING.";
+  }
+  50% {
+    content: "LOADING..";
+  }
+  100% {
+    content: "LOADING...";
+  }
+}
 </style>

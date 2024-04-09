@@ -1,4 +1,5 @@
 export const useAppDataStore = defineStore('appData', () => {
+  const isloading = ref(false);
   const eduLevels = [
         'Primary School',
         'Secondary School',
@@ -26,7 +27,9 @@ export const useAppDataStore = defineStore('appData', () => {
       }
       return yearsArray;
     })
+    // toogle laoding 
+    const toogleLoading = ()=> isloading.value ? isloading.value = false : isloading.value = true
 
   
-    return { eduLevels, economySector, getYearsArray }
+    return { eduLevels, economySector, getYearsArray, isloading, toogleLoading}
   })

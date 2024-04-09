@@ -7,7 +7,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: 'ICTC - Promotion',
+      title: 'ICTC Innovation',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1', }
       ],

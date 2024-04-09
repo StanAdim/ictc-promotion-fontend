@@ -8,7 +8,9 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-widgets">
-                                <h2><a href="index.html">ICTC | SIDO  </a></h2>
+                                <!-- <h2><a href="index.html">ICTC | SIDO  </a></h2> -->
+                            <img src="/logo/ictc.png" alt="logo" height="120" width="180"> 
+
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere ante ut gravida pellentesque.</p>
                                 <div class="footer-social">
                                     <ul class="social-icon">

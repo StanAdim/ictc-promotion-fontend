@@ -4,15 +4,15 @@ definePageMeta({
   layout: 'default',
 }) 
 useHead({
-  title:'Incubation Form'
+  title:'SIDO Incubation Programme'
 })
 const formData = ref({
   fullName: '',
   birthYear: 'none',
-  nidaNumber: '12345678901234567890',
+  nidaNumber: '',
   educationLevel: 'none',
   BusinessRegStatus: '0',
-  phoneNumber: '255767941560',
+  phoneNumber: '',
   email: '',
   businessSector: 'none',
   businessName: '',
@@ -23,17 +23,26 @@ const validationError = ref(null);
 const appData = useAppDataStore()
 // handle the form
 const  handleForm = async ()=> {
+  appData.toogleLoading()
   await useApiFetch('/sanctum/csrf-cookie');
   const {data, error} = await useApiFetch("/api/create-profile-application", {
     method: 'post',
     body: formData.value
   });
-
-  console.log(data,error.value?.data)
-  if( error.value?.data){
+  if(data.value){
+    appData.toogleLoading()
+    validationError.value = null
+    hasError.value = false
+  }
+  else{
+    appData.toogleLoading()
+    if( error.value?.data){
     validationError.value = error.value?.data.errors
     hasError.value = true;
   }
+  }
+  console.log(data.value,error.value?.data)
+
 }
 </script>
 
@@ -41,8 +50,8 @@ const  handleForm = async ()=> {
 <!-- Start  Form -->
 <section class="contact-area pt-100 pb-100">
     <div class="container">
-      <progress-bar />
-        <div class="row">
+      <loading-bars v-if="appData.isloading" />
+        <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
                 <div class="contact-form">
                     <h2>Personal Profile</h2>
@@ -118,16 +127,18 @@ const  handleForm = async ()=> {
                             </div>
                         </div>
                     </form>
-                    <template v-if="hasError">
-                      <p class="ajax-response" v-for="error in validationError" 
-                      :key="error">{{error[0]}}</p>
-                    </template>
                 </div>
             </div>
             <!-- Contact Form Sidebar -->
             <div class="col-lg-3">
               <circular-progress />
                 <div class="contact-detail">
+                  <template v-if="hasError">
+                    <h2>Errors</h2>
+                    
+                      <p class="ajax-response" v-for="error in validationError" 
+                      :key="error">{{error[0]}}</p>
+                    </template>
                     <h2>Our contact details</h2>
                     <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p> -->
                     <div class="contact-detail-list">
