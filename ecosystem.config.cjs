@@ -1,7 +1,7 @@
 module.exports = {
     apps: [
       {
-        name: 'innovation.ictc',
+        name: 'innovation.app',
         port: '3030',
         exec_mode: 'cluster',
         instances: 'max',
