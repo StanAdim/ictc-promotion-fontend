@@ -1,19 +1,21 @@
 <script setup>
 const props = defineProps({
-    message:String
+    message: String
 })
 </script>
+
 <template>
     <div class="toast-container">
-        <div class="toast success">This is a toasting tip!</div>
+        <div class="toast success">{{ message }}</div>
     </div>
 </template>
+
 <style scoped>
 .toast-container {
   position: absolute;
   top: 4rem;
   right: 20px;
-  z-index: 999; /* Ensure it appears above other content */
+  z-index: 9000; /* Ensure it appears above other content */
 }
 .success {
     background-color: #27a340;
@@ -26,8 +28,8 @@ const props = defineProps({
 .toast {
   padding: 10px 20px;
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  /* animation: slideIn 0.5s ease-in-out forwards, fadeOut 0.5s 8.5s ease-in-out forwards; */
+  box-shadow: 0 2px 5px #00000033;
+  animation: slideIn 0.5s ease-in-out forwards, fadeOut 10s 8.5s ease-in-out forwards;
 }
 
 @keyframes slideIn {
@@ -38,5 +40,4 @@ const props = defineProps({
     transform: translateX(0);
   }
 }
-
 </style>

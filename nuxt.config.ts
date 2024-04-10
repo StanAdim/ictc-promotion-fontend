@@ -4,6 +4,8 @@ export default defineNuxtConfig({
   modules: [
     // ...
     '@pinia/nuxt',
+    // '@ant-design-vue',
+    
   ],
   app: {
     head: {
@@ -13,11 +15,11 @@ export default defineNuxtConfig({
       ],
       script: [
         // {type:"text/javascript",src :"/js/script.js",},
-        {type:"text/javascript",src :"/js/modernizr.min.js",},
-        {type:"text/javascript",src :"/js/jquery-3.5.1.min.js",},
-        {type:"text/javascript",src :"/js/popper.min.js",},
-        {type:"text/javascript",src :"/js/bootstrap.min.js",},
-        {type:"text/javascript",src :"/js/owl.carousel.min.js",},
+        // {type:"text/javascript",src :"/js/modernizr.min.js",},
+        // {type:"text/javascript",src :"/js/jquery-3.5.1.min.js",},
+        // {type:"text/javascript",src :"/js/popper.min.js",},
+        // {type:"text/javascript",src :"/js/bootstrap.min.js",},
+        // {type:"text/javascript",src :"/js/owl.carousel.min.js",},
       ],
       link: [
         // <link rel="stylesheet" href="https://myawesome-lib.css">
@@ -33,3 +35,4 @@ export default defineNuxtConfig({
   }
   
 })
+
