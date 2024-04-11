@@ -104,3 +104,22 @@
     }
   }
   
+  .addNewInput {
+    padding:.4rem;
+    margin-bottom: .4rem;
+    font-size: small;
+    color: #efeeea;
+    background-color: #3b91ec;
+    border-radius: .4rem;
+  }
+  .addNewInput i {
+    padding:.3rem;
+    color: rgb(149, 241, 243);
+    margin:.6rem 0px;
+    background-color: #307dcf;
+    border-radius: .4rem;
+  }
+  .addNewInput:hover {
+    background-color: #6ca1d9;
+    border: 1px solid #1014db;
+  }

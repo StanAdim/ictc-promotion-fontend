@@ -16,15 +16,15 @@ const appData = useAppDataStore()
                     <div class="col-lg-6">
                         <div class="hero-caption">
                             <div class="hero-caption-full pt-100">
-                                <h2>INNOVATIVE IDEAS</h2>
-                                <h2>MAWAZO BUNIFU</h2>
+                                <h2>ICT INNOVATIVE IDEAS</h2>
+                                <h2>TEHAMA MAWAZO BUNIFU</h2>
                                 <!-- <p>Dar es salaam</p> -->
-                                <p>Application for individuals with Innovative Ideas to participate in SIDO incubation Program.</p>
-                                <p>Application deadline <span class="deadline">April 15th, 2024</span></p>
+                                <p>ICT Commission partners with SIDO Incubation programme toward promoting ICT innovations</p>
+                                <p>Application deadline <span class="deadline">April 30th, 2024</span></p>
                                   <div class="hero-btn mt-30">
-                                    <nuxt-link to="/sido/applicant-profile" class="button-1">Apply Now</nuxt-link>
+                                    <nuxt-link to="/sido/incubation-programe" class="button-1">Apply</nuxt-link>
                                     <!-- <a class="button-1" href="#">Get Started</a> -->
-                                    <a class="button-2" href="#programe-info">Read More</a>
+                                    <a class="button-2" href="#programe-info">Eligibility</a>
                                 </div>
                             </div>
                         </div>

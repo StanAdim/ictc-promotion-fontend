@@ -1,6 +1,9 @@
 
 type BusinessProfile = {
-
+    message: string,
+    data : BusinessData
+}
+type BusinessData = {
     applicationCode:string,
     background:string,
     marketProblem:string,
@@ -16,12 +19,12 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
     const appData = useAppDataStore()
 
     //Saving Applicant Profile Info 
-    async function createBusinessProfile(info: BusinessProfile){
+    async function createBusinessProfile(info: BusinessData){
         appData.toogleLoading()
         await useApiFetch('/sanctum/csrf-cookie');                
         const {data,error} = await useApiFetch(`/api/create-business-profile/${info.applicationCode}`,{
           method: 'POST',
-          body: info as BusinessProfile
+          body: info as BusinessData
         });
         // console.log(BusinessProfileRespose?.data.value);
         if(data.value){
@@ -29,8 +32,7 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
             businessProfile.value = data.value as BusinessProfile
             saveError.value = null
             //Move next Form
-            // navigateTo(`/sido/business-profile-${applicantProfile.value?.data.id}`)
-            navigateTo(`/`)
+            navigateTo(`/sido/competition-profile-${businessProfile.value?.data.applicationCode}`)
           }
           else{
             appData.toogleLoading()

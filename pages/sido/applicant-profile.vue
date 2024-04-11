@@ -4,7 +4,7 @@ definePageMeta({
   layout: 'default',
 }) 
 useHead({
-  title:'SIDO Incubation Programme'
+  title:'Applicant profile'
 })
 const formData = ref({
   fullName: '',

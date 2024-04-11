@@ -1,25 +1,27 @@
-<script  setup>
-useHead({
-  title:'Business Profile'
-})
+<script setup>
 const route = useRoute()
+useHead({
+    title: 'Business Projection profile'
+})
 const formData = ref({
     applicationCode: route.params.id,
-    background:'',
-    marketProblem:'',
-    marketBase:'',
-    prototypeDescription:'',
-    marketSize:'',
+    expectedRevenue:'',
+    machineEquipment:'',
+    workingCapital:'',
+    investmentPlan:'',
+    financingSource:'',
+    supportNeeded:'',
+    challenges:'',
 })
 const hasError = ref(false);
 const validationError = ref(null);
-const businessProfile = useBusinessStore()
+const businessProjection = useProjectionStore()
 const appData = useAppDataStore()
 // handle the form
 const  handleForm = async ()=> {
-    await businessProfile.createBusinessProfile(formData.value)
-    if(businessProfile.saveError){
-        validationError.value = businessProfile.saveError
+    await businessProjection.createProjectionDetail(formData.value)
+    if(businessProjection.saveError){
+        validationError.value = businessProjection.saveError
         hasError.value = true
     }
     else{
@@ -29,10 +31,10 @@ const  handleForm = async ()=> {
     }
 //   console.log(formData.value)
 }
-</script>
 
+</script>
 <template>
-<!-- Start  Form -->
+    <!-- Start  Form -->
 <section class="contact-area pt-100 pb-100">
     <toasting-tip message="Tool tip message"/>
     <div class="container">
@@ -41,33 +43,44 @@ const  handleForm = async ()=> {
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
                 <div class="contact-form">
-                    <h2>Applicant Business Profile <i class="fa-solid fa-network-wired"></i></h2>
+                    <h2>Business Projections <i class="fa-solid fa-arrow-up-right-dots"></i></h2>
                     <form id="contact-form" @submit.prevent="handleForm()">
                         <div class="row">
+                            <div class="col-md-6">
+                                <label for="expectedRevenue">How much will your business generate</label>
+                                <input type="number" 
+                                v-model="formData.expectedRevenue" id="expectedRevenue" placeholder="Revenue Projection">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="workingCapital">The current working capital invested</label>
+                                <input type="text" 
+                                v-model="formData.workingCapital" id="workingCapital" placeholder="The working capital invested and value">
+                            </div>
+
                             <div class="col-md-12">
-                                <label for="background">Applicant Background</label>
-                                <textarea v-model="formData.background" id="background" 
-                                placeholder="Brief: Tell us about your Background"></textarea>
+                                <label for="investmentPlan">The future investment plan</label>
+                                <textarea v-model="formData.investmentPlan" id="investmentPlan" 
+                                placeholder="Brief: How much do you plan to invest"></textarea>
                             </div>
                             <div class="col-md-12">
-                                <label for="marketProblem">The Market|Community Problem your business is solving</label>
-                                <textarea v-model="formData.marketProblem" id="marketProblem" 
-                                placeholder="Brief: What problem in the market/community is your business solving"></textarea>
+                                <label for="financingSource">The financing sources</label>
+                                <textarea v-model="formData.financingSource" id="financingSource" 
+                                placeholder="Brief: What will be the financing sources and how much you plan to source"></textarea>
                             </div>
                             <div class="col-md-12">
-                                <label for="marketBase">The target customer|market and why?</label>
-                                <textarea v-model="formData.marketBase" id="marketBase" 
-                                placeholder="Brief: Who is your current customers/markets or your target customer/market and why"></textarea>
+                                <label for="supportNeeded">The support needed</label>
+                                <textarea v-model="formData.supportNeeded" id="supportNeeded" 
+                                placeholder="Brief: What support do you envisage you will need?"></textarea>
                             </div>
-                            <div class="col-md-12">
-                                <label for="prototypeDescription">Brief on Model or Prototype</label>
-                                <textarea v-model="formData.prototypeDescription" id="prototypeDescription" 
-                                placeholder="Illustrate the model or prototype in place. The Solution with all its features/ description and its current status. The prototype current status (include all images and links)."></textarea>
+                            <div class="col-md-6">
+                                <label for="machineEquipment">Business Tools <span class="addNewInput">Add Equipment <i class="fa-solid fa-plus"></i></span></label>
+                                <input type="text" 
+                                v-model="formData.machineEquipment" id="machineEquipment" placeholder="Add current machines and equipment and its value">
                             </div>
-                            <div class="col-md-12">
-                                <label for="marketSize">Brief on Target Market Size</label>
-                                <textarea v-model="formData.marketSize" id="marketSize" 
-                                placeholder="Tell us about your market size and the targeted market"></textarea>
+                            <div class="col-md-6">
+                                <label for="challenges"> The challenges you foresee <span class="addNewInput">Add Chanllenge <i class="fa-solid fa-plus"></i></span></label>
+                                <input type="text" 
+                                v-model="formData.challenges" id="challenges" placeholder="Add challenge">
                             </div>
                             <div class="col-12">
                                 <button class="button-1" type="submit">Save and Continue</button>
@@ -115,5 +128,3 @@ const  handleForm = async ()=> {
 </section>
 <!-- End Form Section -->
 </template>
-
-<style scoped></style>
