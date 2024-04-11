@@ -14,8 +14,9 @@
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere ante ut gravida pellentesque.</p>
                                 <div class="footer-social">
                                     <ul class="social-icon">
-                                        <li><a href="#"><font-awesome-icon :icon="['fab', 'twitter']" /></a></li>
-                                        <li><a href="#"><font-awesome-icon :icon="['fab', 'linkedin']" /></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-linkedin"></i></a></li>
+                                        <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

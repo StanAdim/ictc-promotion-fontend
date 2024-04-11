@@ -22,7 +22,7 @@ const appData = useAppDataStore()
                                 <p>Application for individuals with Innovative Ideas to participate in SIDO incubation Program.</p>
                                 <p>Application deadline <span class="deadline">April 15th, 2024</span></p>
                                   <div class="hero-btn mt-30">
-                                    <nuxt-link to="/form" class="button-1">Apply Now</nuxt-link>
+                                    <nuxt-link to="/sido/applicant-profile" class="button-1">Apply Now</nuxt-link>
                                     <!-- <a class="button-1" href="#">Get Started</a> -->
                                     <a class="button-2" href="#programe-info">Read More</a>
                                 </div>
@@ -57,10 +57,10 @@ const appData = useAppDataStore()
                             <p>Access to Working Spaces, Networking enviroment, Access to Financial linkages, Coaching and mentorship</p>
                             <h3>Eligibility:</h3>
                             <ul>
-                                <li><i class="fas fa-check"></i>Must be a Tanzanian aged 18 and above</li>
-                                <li><i class="fas fa-check"></i>Proposal not exceeding 3 pages (English/Swahili)</li>
-                                <li><i class="fas fa-check"></i>Innovator must have started (Prototype)</li>
-                                <li><i class="fas fa-check"></i>Areas of innovation (Value addition to products, technology, scancode Blue Economy)</li>
+                                <li><i class="fa-regular fa-square-check"></i>Must be a Tanzanian aged 18 and above</li>
+                                <li><i class="fa-regular fa-square-check"></i>Proposal not exceeding 3 pages (English/Swahili)</li>
+                                <li><i class="fa-regular fa-square-check"></i>Innovator must have started (Prototype)</li>
+                                <li><i class="fa-regular fa-square-check"></i>Areas of innovation (Value addition to products, technology, scancode Blue Economy)</li>
                             </ul>
                             <div class="about-btn mt-30">
                                 <a class="button-2" href="#">Learn More</a>

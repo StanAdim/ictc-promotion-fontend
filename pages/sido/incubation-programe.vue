@@ -1,20 +1,9 @@
 <script lang="ts" setup>
-definePageMeta({
-    layout: 'application'
+useHead({
+  title: 'ICTC - SIDO Incubation Programme'
 })
 </script>
 
 <template>
-    <template>
-  <a-space wrap>
-    <a-button type="primary">Primary Button</a-button>
-    <a-button>Default Button</a-button>
-    <a-button type="dashed">Dashed Button</a-button>
-    <a-button type="text">Text Button</a-button>
-    <a-button type="link">Link Button</a-button>
-  </a-space>
-</template>
-
-
-
+  Landing Sido Incubation Programme
 </template>

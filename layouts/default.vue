@@ -1,14 +1,13 @@
 <script lang="ts" setup>
 const appData = useAppDataStore()
 
+
 </script>
 
 <template>
   <div>
     <!-- Layout: default -->
     <page-header />
-    <toasting-tip  message="toastingTip" />
-
     <slot />
     <page-footer/>
   </div>
