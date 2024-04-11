@@ -32,7 +32,13 @@ export default defineNuxtConfig({
         // '@fortawesome/fontawesome-svg-core/styles.css'
       ],
     }
-  }
+  },
+  css: [
+    '/assets/css/custom.style.css',
+    '/assets/fontawesome/css/fontawesome.min.css',
+    '/assets/fontawesome/css/solid.min.css',
+    '/assets/fontawesome/css/brands.min.css',
+  ]
   
 })
 

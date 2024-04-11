@@ -25,7 +25,7 @@ const appData = useAppDataStore()
 const  handleForm = async ()=> {
   appData.toogleLoading()
   await useApiFetch('/sanctum/csrf-cookie');
-  const {data, error} = await useApiFetch("/api/create-profile-application", {
+  const {data, error} = await useApiFetch("/api/create-applicant-profile", {
     method: 'post',
     body: formData.value
   });
