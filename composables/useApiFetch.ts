@@ -6,8 +6,8 @@ export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
     accept: "application/json",
     referer: "http://localhost:3000"
   }
-  const baseApi = "http://localhost:3050/public"; // dev api
-  // const baseApi = "http://41.59.225.216:3050/public"; // server api
+  // const baseApi = "http://localhost:3050/public"; // dev api
+  const baseApi = "http://41.59.225.216:3050/public"; // server api
   const token = useCookie('XSRF-TOKEN');
 
   if (token.value) {
