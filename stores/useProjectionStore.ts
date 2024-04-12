@@ -20,6 +20,7 @@ export const useProjectionStore = defineStore('projectionStore', () => {
     const projectionDetail = ref < ProjectionDetail | null>(null)
     const saveError = ref <any>(null)
     const appData = useAppDataStore()
+    const  applicantStore = useApplicantStore()
 
     //Saving Competions  Info 
     async function createProjectionDetail(info: ProjectionData){
@@ -44,5 +45,5 @@ export const useProjectionStore = defineStore('projectionStore', () => {
         return { data,error};
     }
 
-    return { projectionDetail,saveError , createProjectionDetail}
+    return { projectionDetail, saveError, createProjectionDetail}
   })

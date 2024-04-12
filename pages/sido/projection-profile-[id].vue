@@ -36,9 +36,11 @@ const  handleForm = async ()=> {
 <template>
     <!-- Start  Form -->
 <section class="contact-area pt-100 pb-100">
-    <toasting-tip message="Tool tip message"/>
     <div class="container">
     <progress-bar stage1="complete" stage2="complete"  stage3="complete" stage4="current"/>
+    <template v-if="hasError">
+        <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" />
+    </template>
       <loading-bars v-if="appData.isloading" />
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
@@ -91,37 +93,7 @@ const  handleForm = async ()=> {
             </div>
             <!-- Contact Form Sidebar -->
             <div class="col-lg-3">
-              <circular-progress />
-                <div class="contact-detail">
-                  <template v-if="hasError">
-                    <h2>Errors</h2>
-                    
-                      <p class="ajax-response" v-for="error in validationError" 
-                      :key="error">{{error[0]}}</p>
-                    </template>
-                    <h2>Our contact details</h2>
-                    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p> -->
-                    <div class="contact-detail-list">
-                        <ul>
-                            <li>
-                                <span>Phone</span>
-                                <small>+255 738 424 217</small><br>
-                                <small>+255 738 424 217</small>
-                            </li>
-                            <li>
-                                <span>Email</span>
-                                <small>ictsupport@ictc.go.tz</small><br>
-                                <small>info@ictc.go.tz</small>
-                            </li>
-
-
-                        </ul>
-                    </div>
-                    <!-- Follow area -->
-                    <ul class="social-link">
-                        <!-- <li><a href="#"><i class="fab fa-facebook-f"></i></a></li> -->
-                    </ul>
-                </div>
+                <contact-card />
             </div>
         </div>
     </div>

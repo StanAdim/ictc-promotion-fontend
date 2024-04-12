@@ -9,9 +9,8 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="footer-widgets">
                                 <!-- <h2><a href="index.html">ICTC | SIDO  </a></h2> -->
-                            <img src="/logo/ictc.png" alt="logo" height="120" width="180"> 
+                            <img src="/logo/sido.png" alt="logo" height="80" width="120"> 
 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum posuere ante ut gravida pellentesque.</p>
                                 <div class="footer-social">
                                     <ul class="social-icon">
                                         <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
@@ -28,8 +27,8 @@
                                     <div class="footer-widgets">
                                         <h3>Institutions</h3>
                                         <ul>
-                                            <li><a href="#">ICT Commission</a></li>
                                             <li><a href="#">SIDO</a></li>
+                                            <li><a href="#">ICT Commission</a></li>
                                         
                                         </ul>
                                     </div>

@@ -9,7 +9,7 @@
     --symbol-border-width: 3px;
     display: flex;
     list-style-type: none;
-    margin: 0;
+    margin: .4rm .2rem;
     padding: 0;
     width: 100%;
     min-width: fit-content;

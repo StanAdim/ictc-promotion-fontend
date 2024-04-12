@@ -19,7 +19,7 @@ defineProps({
 })
 </script>
 <template>
-  <section style="padding: 3em">
+  <section style="padding: .4rem">
     <!-- data values complete , current , incomplete  -->
     <ol class="my-progress-bar">
       <li class="my-progress-bar--step"  :data-my-progress-bar-step="stage1">
