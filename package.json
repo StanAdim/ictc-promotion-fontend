@@ -24,6 +24,7 @@
     }
   },
   "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.11.4",
     "@vesp/nuxt-fontawesome": "^1.0.4"
   }
 }

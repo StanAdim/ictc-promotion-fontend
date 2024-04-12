@@ -12,7 +12,7 @@ function toogleAccordion(option){
 <template>
   <section class="dosoft-faq-section mt-4 pt-100 pb-100">
     <div class="container">
-      <div class="row justify-content-center">
+      <div class="row justify-content-center my-4">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-title mb-50 text-center">
             <h2>
@@ -21,9 +21,7 @@ function toogleAccordion(option){
             </h2>
             <div class="section-devider"></div>
             <p>
-              Donec consectetur est gravida eros porta congue. Vivamus eleifend,
-              tortor vel porta eleifend, odio orci dapibus sapien, nec feugiat
-              enim nisi non lorem.
+              Dear applicant you are about to submit your application kindly review all of your details before submission 
             </p>
           </div>
         </div>

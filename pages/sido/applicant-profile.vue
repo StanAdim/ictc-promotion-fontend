@@ -44,7 +44,7 @@ const  handleForm = async ()=> {
 <section class="contact-area pt-100 pb-100">
     <toasting-tip message="Tool tip message"/>
     <div class="container">
-      <progress-bar />
+      <progress-bar stage1="current" />
       <loading-bars v-if="appData.isloading" />
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
