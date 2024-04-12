@@ -15,7 +15,7 @@ type UserInfo = {
 }
 
 
-export const useAuthStore = defineStore('auth', () => {
+export const useSideApplication = defineStore('sido-app', () => {
     const user = ref < User | null>(null)
     const isLoggedIn = computed(() => !!user.value)
     const userError = ref <any>(null)
