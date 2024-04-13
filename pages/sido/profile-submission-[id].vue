@@ -10,6 +10,8 @@ const openBusiness = ref(true);
 const openCompetition = ref(true);
 const openProjection = ref(true);
 
+const nowDate = new Date()
+
 function toogleAccordion() {
   openBusiness.value = true;
   openCompetition.value = true;
@@ -76,7 +78,7 @@ console.log(application);
                   href="#"
                   class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50 dark:hover:bg-gray-700 dark:hover:text-white"
                 >
-                  Business Profile
+                  Business Details
                 </a>
               </li>
               <li @click.prevent="toogleAccordion3()">
@@ -103,27 +105,32 @@ console.log(application);
               <h3 class="text-lg font-bold text-gray-900 mb-2">
                 Personal Information
               </h3>
-              <p class=""><span class="deadline">Name: </span>{{ application?.data.fullName }}</p>
-              <p class=""><span class="deadline">Email: </span>{{ application?.data.email }} - {{ application?.data.nidaNumber }}</p>
-              <p class=""><span class="deadline">Phone: </span>{{ application?.data.phoneNumber }}</p>
-              <p class=""><span class="deadline">Education level: </span>{{ application?.data.educationLevel }}</p>
+              <UsableParagraph key-name="Name" :data="application?.data.fullName" :has-hr="false" />
+              <template v-if="application?.data"><UsableParagraph  key-name="Age" :data="nowDate.getFullYear() - application?.data.birthYear" :has-hr="false" /></template>
+              <UsableParagraph key-name="NIDA Number" :data="application?.data.nidaNumber" :has-hr="false" />
+              <UsableParagraph key-name="Email" :data="application?.data.email" :has-hr="false" />
+              <UsableParagraph key-name="Phone" :data="application?.data.phoneNumber" :has-hr="false" />
+              <UsableParagraph key-name="Education level:" :data="application?.data.educationLevel" :has-hr="false" />
             </div>
             <div
               class="p-6 bg-gray-50 text-medium dark:text-lime-900-400 dark:bg-teal-50 rounded-lg"
               :class="{ hide: openBusiness }"
             >
               <h3 class="text-lg font-bold text-gray-900 mb-2">
-                Business Profile
+                Business Details
               </h3>
-              <p class="mb-2">
-                This is some placeholder content the Profile tab's associated
-                content, clicking another tab will toggle the visibility of this
-                one for the next.
-              </p>
-              <p>
-                The tab JavaScript swaps classes to control the content
-                visibility and styling.
-              </p>
+              <template v-if="application?.data.BusinessRegStatus != '0' ">
+                <UsableParagraph key-name="Business Name" :data="application?.data.businessName" :has-hr="false" />
+                <UsableParagraph key-name="Business Sector" :data="application?.data.businessSector" :has-hr="false" />
+                <UsableParagraph key-name="Business Location" :data="application?.data.businessLocation" :has-hr="true" />
+              </template>
+
+                <UsableParagraph key-name="Background " :data="application?.data.businessDetails.background" />
+                <UsableParagraph key-name="Market | Social Problem " :data="application?.data.businessDetails.marketProblem" />
+                <UsableParagraph key-name="Prototype | Model " :data="application?.data.businessDetails.prototypeDescription" />
+                <UsableParagraph key-name="Market Base" :data="application?.data.businessDetails.marketBase" />
+                <UsableParagraph key-name="Market Size" :data="application?.data.businessDetails.marketSize" />
+                  
             </div>
             <div
               class="p-6 bg-gray-50 text-medium dark:text-lime-900-400 dark:bg-teal-50 rounded-lg"
@@ -132,15 +139,11 @@ console.log(application);
               <h3 class="text-lg font-bold text-gray-900 mb-2">
                 Competitors Information
               </h3>
-              <p class="mb-2">
-                This is some placeholder content the Profile tab's associated
-                content, clicking another tab will toggle the visibility of this
-                one for the next.
-              </p>
-              <p>
-                The tab JavaScript swaps classes to control the content
-                visibility and styling.
-              </p>
+              <UsableParagraph key-name="Competitors " :data="application?.data.competitorsDetails.competitors" />
+              <UsableParagraph key-name="Competitive Advantage" :data="application?.data.competitorsDetails.competitiveAdvantage" />
+              <UsableParagraph key-name="Unique Strategy " :data="application?.data.competitorsDetails.marketStrategy" />
+              <UsableParagraph key-name="Team Management " :data="application?.data.competitorsDetails.teamCapacity" />
+
             </div>
             <div
               class="p-6 bg-gray-50 text-medium dark:text-lime-900-400 dark:bg-teal-50 rounded-lg"
@@ -149,15 +152,13 @@ console.log(application);
               <h3 class="text-lg font-bold text-gray-900 mb-2">
                 Business Projections
               </h3>
-              <p class="mb-2">
-                This is some placeholder content the Profile tab's associated
-                content, clicking another tab will toggle the visibility of this
-                one for the next.
-              </p>
-              <p>
-                The tab JavaScript swaps classes to control the content
-                visibility and styling.
-              </p>
+              <UsableParagraph key-name="Expected Revenue " :data="application?.data.projectionDetails.expectedRevenue" />
+              <UsableParagraph key-name="Financial Sources " :data="application?.data.projectionDetails.financingSource" />
+              <UsableParagraph key-name="Machines | Equipment " :data="application?.data.projectionDetails.machineEquipment" />
+              <UsableParagraph key-name="Working Capital " :data="application?.data.projectionDetails.workingCapital" />
+              <UsableParagraph key-name="Investment Plan " :data="application?.data.projectionDetails.investmentPlan" />
+              <UsableParagraph key-name="Challenges " :data="application?.data.projectionDetails.challenges" />
+              <UsableParagraph key-name="Support Needed " :data="application?.data.projectionDetails.supportNeeded" />
             </div>
           </div>
         </div>
