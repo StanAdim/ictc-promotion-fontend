@@ -4,7 +4,7 @@ import {useRequestHeaders} from "nuxt/app";
 export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
   let headers: any = {
     accept: "application/json",
-    referer: "http://localhost:3000"
+    referer: "http://innovation.ictc.go.tz"
   }
   // const baseApi = "http://localhost:3050/public"; // dev api
   const baseApi = "http://41.59.225.216:3050/public"; // server api
