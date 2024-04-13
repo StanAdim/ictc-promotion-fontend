@@ -39,7 +39,14 @@ export default defineNuxtConfig({
     '/assets/fontawesome/css/fontawesome.min.css',
     '/assets/fontawesome/css/solid.min.css',
     '/assets/fontawesome/css/brands.min.css',
-  ]
+  ],
+  runtimeConfig:{
+    public:{
+      // apiBaseUlr: process.env.BASE_URL || 'http://41.59.225.216:3050/public',
+      apiBaseUlr: 'http://41.59.225.216:3050/public',
+      appName:  'ICT Innovation',
+    }
+  }
   
 })
 
