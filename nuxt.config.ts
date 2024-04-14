@@ -36,9 +36,9 @@ export default defineNuxtConfig({
   runtimeConfig:{
     public:{
       // apiBaseUlr: process.env.BASE_URL || 'http://41.59.225.216:3050/public',
-      apiBaseUlr: 'http://localhost:9050/public',
+      // apiBaseUlr: 'http://localhost:9050/public',
       // apiBaseUlr: 'http://41.59.225.216:3050/public',
-      // apiBaseUlr: 'http://41.59.225.216:9050/public',
+      apiBaseUlr: 'http://41.59.225.216:9050/public',
       appName:  'ICT Innovation',
     }
   }
