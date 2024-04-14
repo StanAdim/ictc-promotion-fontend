@@ -27,7 +27,7 @@ type Application = {
 export const useApplicantStore = defineStore('applicantStore', () => {
     const applicantProfile = ref < ApplicantProfile | null>(null)
     const saveError = ref <any>(null)
-    const OnSubmitApplication = ref<any>(null)
+    const dataOnSubmitApplication = ref<any>(null)
     
     const appData = useAppDataStore()
 
@@ -59,7 +59,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
       const {data, error} = useApiFetch(`/api/application-before-submission/${uuid}`)
       if(data.value){
         appData.toogleLoading()
-        OnSubmitApplication.value = data.value as Application
+        dataOnSubmitApplication.value = data.value as Application
         saveError.value = null
       }
       else{
@@ -69,5 +69,5 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     return {data , error}
     }
 
-    return { applicantProfile, OnSubmitApplication, saveError , createApplicantProfile, applicationBeforeSubmit}
+    return { applicantProfile, dataOnSubmitApplication, saveError , createApplicantProfile, applicationBeforeSubmit}
   })

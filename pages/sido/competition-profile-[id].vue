@@ -26,7 +26,7 @@ const  handleForm = async ()=> {
         hasError.value = false;
         // formData.value = null
     }
-  console.log(formData.value)
+//   console.log(formData.value)
 }
 
 </script>

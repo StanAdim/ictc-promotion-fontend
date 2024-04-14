@@ -2,13 +2,16 @@
 useHead({
   title: "Application Submission",
 });
+definePageMeta({})
+const appData = useAppDataStore();
 const router = useRoute();
 const id = router.params.id;
-let application = ref({})
+const application = ref({})
 const openPersonal = ref(false);
 const openBusiness = ref(true);
 const openCompetition = ref(true);
 const openProjection = ref(true);
+const  submittionButton = ref(false)
 
 const nowDate = new Date()
 
@@ -16,50 +19,56 @@ function toogleAccordion() {
   openBusiness.value = true;
   openCompetition.value = true;
   openProjection.value = true;
+  submittionButton.value = false
   return (openPersonal.value = false);
 }
 function toogleAccordion2() {
   openPersonal.value = true;
   openCompetition.value = true;
   openProjection.value = true;
+  submittionButton.value = false
   return (openBusiness.value = false);
 }
 function toogleAccordion3() {
   openPersonal.value = true;
   openBusiness.value = true;
   openProjection.value = true;
+  submittionButton.value = false
   return (openCompetition.value = false);
 }
 function toogleAccordion4() {
   openPersonal.value = true;
   openCompetition.value = true;
   openBusiness.value = true;
+  submittionButton.value = true
   return (openProjection.value = false);
 }
 const applicantStore = useApplicantStore();
-await applicantStore.applicationBeforeSubmit(id);
-application = await applicantStore.OnSubmitApplication;
-// console.log(application);
+await applicantStore.applicationBeforeSubmit(id)
+application.value = applicantStore.OnSubmitApplication
+
+
 </script>
 <template>
   <section class="dosoft-faq-section">
-    <div class="container">
+    <div class="container" >
       <div class="row">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-title mb-20 text-center">
             <h2>
               <i class="fa-regular fa-face-smile"></i>
-              {{ application?.data.fullName }} Application Overview
+              {{ application?.data?.fullName }} Application Overview
               <i class="fa-regular fa-face-smile"></i>
             </h2>
             <div class="section-devider"></div>
-            <p>Kindly, Review your informantion before you submit</p>
+            <p v-if="application">Kindly, Review your informantion before you submit</p>
+            <p v-else>Wait data is loading ...</p>
           </div>
         </div>
       </div>
 
       <div class="row m-auto mb-4 bg-cyan-100">
-        <div class="col-lg-10 offset-lg-2">
+        <div class="col-lg-12" v-if="application">
           <div class="md:flex py-2">
             <ul
               class="flex-column space-y space-y-4 text-sm font-medium dark:text-lime-900-400 md:me-4 mb-4 md:mb-0"
@@ -160,6 +169,9 @@ application = await applicantStore.OnSubmitApplication;
               <UsableParagraph key-name="Challenges " :data="application?.data.projectionDetails.challenges" />
               <UsableParagraph key-name="Support Needed " :data="application?.data.projectionDetails.supportNeeded" />
             </div>
+          </div>
+          <div class="m-2" v-if="submittionButton">
+            <button class="button-1" type="submit">Submit Application</button>
           </div>
         </div>
       </div>
