@@ -10,9 +10,12 @@ export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
   // const baseApi = "http://localhost:3050/public"; // dev api
   const baseApi = config.public.apiBaseUlr; // server api
   const token = useCookie('XSRF-TOKEN');
-
+  console.log(`requested token`, token.value);
+  
   if (token.value) {
     headers['X-XSRF-TOKEN'] = token.value as string;
+    console.log(`HeaderToken`,headers['X-XSRF-TOKEN']);
+    
   }
 
   if (process.server) {

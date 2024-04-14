@@ -79,7 +79,8 @@ const businessPlanSections = [
                 </li>
           </ul>
           <div class="hero-btn mt-30">
-            <nuxt-link to="/sido/applicant-profile" class="button-1">Start Now</nuxt-link>
+            <nuxt-link to="/sido/applicant-profile" class="button-1">Start now</nuxt-link>
+            <nuxt-link to="/sido/applicant-profile" class="button-1">Update</nuxt-link>
           </div>
         </div>
       </div>
