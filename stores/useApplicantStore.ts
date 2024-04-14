@@ -35,23 +35,24 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     async function createApplicantProfile(info: ApplicantProfile){
         appData.toogleLoading()
         await useApiFetch('/sanctum/csrf-cookie');
-        const applicantProfileRespose = await useApiFetch('/api/create-applicant-profile',{
+        const {data, error} = await useApiFetch('/api/create-applicant-profile',{
           method: 'POST',
           body: info as ApplicantProfile
         });
-        // console.log(applicantProfileRespose?.data.value);
-        if(applicantProfileRespose?.data.value){
+        // console.log(data.value);
+        if(data.value){
             appData.toogleLoading()
-            applicantProfile.value = applicantProfileRespose?.data.value as ApplicantProfile
+            applicantProfile.value = data.value as ApplicantProfile
             saveError.value = null
             // next Form
+            appData.AssignNotificationMessage(applicantProfile.value?.message)
             navigateTo(`/sido/business-profile-${applicantProfile.value?.data.id}`)
           }
           else{
             appData.toogleLoading()
-            if( applicantProfileRespose?.error.value?.data) saveError.value = applicantProfileRespose?.error.value?.data.errors
+            if( error.value?.data) saveError.value = error.value?.data.errors
         }
-        return applicantProfileRespose;
+        return {data, error};
     }
     async function applicationBeforeSubmit (uuid :string){
       appData.toogleLoading()

@@ -1,5 +1,7 @@
 export const useAppDataStore = defineStore('appData', () => {
   const isloading = ref(false);
+  const notificationMessage = ref('')
+  const showMessage = ref(false)
   const eduLevels = [
         'Primary School',
         'Secondary School',
@@ -29,7 +31,15 @@ export const useAppDataStore = defineStore('appData', () => {
     })
     // toogle laoding 
     const toogleLoading = ()=> isloading.value ? isloading.value = false : isloading.value = true
-
-  
-    return { eduLevels, economySector, getYearsArray, isloading, toogleLoading}
+    const toogleShowMessage = ()=> {
+      showMessage.value ? showMessage.value = false : showMessage.value = true
+      setTimeout(function() {
+        showMessage.value ? showMessage.value = false : showMessage.value = true
+      }, 4000);
+    }
+    const AssignNotificationMessage = (message : string)=> {
+      notificationMessage.value = message
+      toogleShowMessage();
+    }  
+    return { notificationMessage, AssignNotificationMessage, showMessage,toogleShowMessage, eduLevels, economySector, getYearsArray, isloading, toogleLoading}
   })

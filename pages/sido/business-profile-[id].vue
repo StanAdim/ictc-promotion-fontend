@@ -33,12 +33,14 @@ const  handleForm = async ()=> {
 
 <template>
 <!-- Start  Form -->
-<section class="contact-area pt-100 pb-100">
+<div class="absolute top-10 left-5">
+  <template v-if="hasError">
+      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="hasError"/>
+  </template>
+</div>
+<section class="contact-area">
     <div class="container">
         <progress-bar stage1="complete" stage2="current" />
-        <template v-if="hasError">
-            <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" />
-        </template>
         <loading-bars v-if="appData.isloading" />
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">

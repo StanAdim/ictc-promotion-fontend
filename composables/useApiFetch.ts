@@ -10,11 +10,11 @@ export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
   const baseApi = config.public.apiBaseUlr; //  Baseapi
 
   const token = useCookie('XSRF-TOKEN');
-  console.log(`requested token`, token.value);
+  // console.log(`requested token`, token.value);
   
   if (token.value) {
     headers['X-XSRF-TOKEN'] = token.value as string;
-    console.log(`HeaderToken`,headers['X-XSRF-TOKEN']);
+    // console.log(`HeaderToken`,headers['X-XSRF-TOKEN']);
     
   }
 

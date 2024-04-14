@@ -39,7 +39,7 @@ function toogleAccordion4() {
 const applicantStore = useApplicantStore();
 await applicantStore.applicationBeforeSubmit(id);
 application = await applicantStore.OnSubmitApplication;
-console.log(application);
+// console.log(application);
 </script>
 <template>
   <section class="dosoft-faq-section">

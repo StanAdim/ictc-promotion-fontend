@@ -31,6 +31,7 @@ export const useCompetitionStore = defineStore('competitionStore', () => {
             competitionDetail.value = data.value as CompetitionDetail
             saveError.value = null
             //Move next Form
+            appData.AssignNotificationMessage(competitionDetail.value?.message)
             navigateTo(`/sido/projection-profile-${competitionDetail.value.data?.applicationCode}`)
           }
           else{

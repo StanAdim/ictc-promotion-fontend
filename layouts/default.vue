@@ -8,6 +8,9 @@ const appData = useAppDataStore()
   <div>
     <!-- Layout: default -->
     <page-header />
+    <div class="absolute top-20 left-1/4 h-5" v-show="appData.showMessage">
+      <toasting-tip :is-succeed="true" :message="appData.notificationMessage"/>
+    </div>
     <slot />
     <page-footer/>
   </div>

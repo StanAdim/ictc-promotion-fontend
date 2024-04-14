@@ -14,8 +14,6 @@ type ProjectionData = {
     challenges:string,
 }
 
-
-
 export const useProjectionStore = defineStore('projectionStore', () => {
     const projectionDetail = ref < ProjectionDetail | null>(null)
     const saveError = ref <any>(null)
@@ -36,6 +34,9 @@ export const useProjectionStore = defineStore('projectionStore', () => {
             projectionDetail.value = data.value as ProjectionDetail
             saveError.value = null
             //Move next Form
+            const applicantStore = useApplicantStore();
+            appData.AssignNotificationMessage(projectionDetail.value?.message)
+            await applicantStore.applicationBeforeSubmit(info.applicationCode);
             navigateTo(`/sido/profile-submission-${projectionDetail.value.data?.applicationCode}`)
           }
           else{

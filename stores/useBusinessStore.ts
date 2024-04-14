@@ -32,6 +32,7 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
             businessProfile.value = data.value as BusinessProfile
             saveError.value = null
             //Move next Form
+            appData.AssignNotificationMessage(businessProfile.value?.message)
             navigateTo(`/sido/competition-profile-${businessProfile.value?.data.applicationCode}`)
           }
           else{
