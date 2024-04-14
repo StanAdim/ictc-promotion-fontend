@@ -7,8 +7,8 @@ export function useApiFetch<T>(path: string, options: UseFetchOptions<T> = {}) {
     referer: "http://innovation.ictc.go.tz"
   }
   const config = useRuntimeConfig()
-  // const baseApi = "http://localhost:3050/public"; // dev api
-  const baseApi = config.public.apiBaseUlr; // server api
+  const baseApi = config.public.apiBaseUlr; //  Baseapi
+
   const token = useCookie('XSRF-TOKEN');
   console.log(`requested token`, token.value);
   

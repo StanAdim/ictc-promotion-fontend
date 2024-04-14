@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
-
     // '@ant-design-vue',
     
   ],
@@ -16,11 +15,6 @@ export default defineNuxtConfig({
       ],
       script: [
         // {type:"text/javascript",src :"/js/script.js",},
-        // {type:"text/javascript",src :"/js/modernizr.min.js",},
-        // {type:"text/javascript",src :"/js/jquery-3.5.1.min.js",},
-        // {type:"text/javascript",src :"/js/popper.min.js",},
-        // {type:"text/javascript",src :"/js/bootstrap.min.js",},
-        // {type:"text/javascript",src :"/js/owl.carousel.min.js",},
       ],
       link: [
         // <link rel="stylesheet" href="https://myawesome-lib.css">
@@ -28,9 +22,8 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/logo/ico.png' }
       ],
       // please note that this is an area that is likely to change
-      style: [
-        // <style type="text/css">:root { color: red }</style>
-        // '@fortawesome/fontawesome-svg-core/styles.css'
+      style: [ 
+        // <style type="text/css">:root { color: red }</style> 
       ],
     }
   },
@@ -43,7 +36,9 @@ export default defineNuxtConfig({
   runtimeConfig:{
     public:{
       // apiBaseUlr: process.env.BASE_URL || 'http://41.59.225.216:3050/public',
-      apiBaseUlr: 'http://41.59.225.216:3050/public',
+      // apiBaseUlr: 'http://localhost:3050/public',
+      // apiBaseUlr: 'http://41.59.225.216:3050/public',
+      apiBaseUlr: 'http://41.59.225.216:9050/public',
       appName:  'ICT Innovation',
     }
   }
