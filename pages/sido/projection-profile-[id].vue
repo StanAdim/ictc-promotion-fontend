@@ -89,8 +89,8 @@ const verifyPlease = ()=>{
                                 v-model="formData.challenges" id="challenges" placeholder="Add challenge">
                             </div>
                             <div class="col-12" >
-                                <button class=" bg-blue-400 text-red-50 py-2 text-xl hover:text-white hover:bg-blue-500 
-                                hover:border round px-20 text-cyan-900" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
+                                <button class=" bg-blue-400 py-2 text-xl hover:text-white hover:bg-blue-500 
+                                hover:border round px-20 text-slate-100" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
                                 <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
                                         <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
                                     <button class="button-1" type="submit">Save and Continue</button>
