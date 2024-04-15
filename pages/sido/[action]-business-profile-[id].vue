@@ -2,6 +2,9 @@
 useHead({
   title:'Business Profile'
 })
+definePageMeta({
+    middleware: 'code-checker'
+})
 const route = useRoute()
 const formData = ref({
     applicationCode: route.params.id,

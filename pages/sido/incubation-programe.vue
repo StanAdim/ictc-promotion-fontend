@@ -22,10 +22,9 @@ const businessPlanSections = [
     "At least one year business and technical comprehensive milestones."
 ];
 const appData = useAppDataStore()
-const showEditStage = ref(false)
 const verifyPlease = ()=>{
-    showEditStage.value = true;
-}
+  appData.setSidoUpdateForm(true);
+  }
 </script>
 
 <template>
@@ -61,22 +60,22 @@ const verifyPlease = ()=>{
   <section class="awesome-features ">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 offset-lg-2">
+        <div class="col-lg-8">
           <div class="section-title text-center">
-            <h2 v-if="!showEditStage">Programme Admission Criteria</h2>
-            <h2 v-if="showEditStage">Proceed Application</h2>
+            <h2 v-if="!appData.showSidoUpdateForm">Programme Admission Criteria</h2>
+            <h2 v-if="appData.showSidoUpdateForm">Proceed Application</h2>
             <div  class="section-devider"></div>
-                <p v-if="!showEditStage">Before you apply for SIDO Incubation Programme its important you read <span class="deadline">Careful and Prepare</span> the following Programme Criteria</p>
-                <p v-if="showEditStage">To proceed your application, enter your <br />  <span class="deadline">Application Code</span></p>
+                <p v-if="!appData.showSidoUpdateForm">Before you apply for SIDO Incubation Programme its important you read <span class="deadline">Careful and Prepare</span> the following Programme Criteria</p>
+                <p v-if="appData.showSidoUpdateForm">To proceed your application, enter your <br />  <span class="deadline">Application Code</span></p>
           </div>
         </div>
       </div>
       <div class="row justify-content-center">
         <loading-bars v-if="appData.isloading" />
-        <div class="my-4 mx-2 left-1/4" v-if="showEditStage">
+        <div class="my-4 mx-2 left-1/4" v-if="appData.showSidoUpdateForm">
           <usable-search-input />
         </div>
-        <div class="col-md-10 my-2 bg" v-if="!showEditStage">    
+        <div class="col-md-10 my-2 bg" v-if="!appData.showSidoUpdateForm">    
           <ul class="space-y-2 text-left text-gray-700 ">
               <li class="flex items-center space-x-3 rtl:space-x-reverse" v-for="item in businessPlanSections" :key="item">
                   <svg class="flex-shrink-0 w-3.5 h-3.5 text-amber-700 dark:text-amber-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 12">
@@ -87,7 +86,7 @@ const verifyPlease = ()=>{
           </ul>
           <div class="hero-btn mt-30">
             <nuxt-link to="/sido/create-applicant-profile" class="button-1">Start now</nuxt-link>
-            <button class="button-1" v-if="!showEditStage" @click="verifyPlease()" >Update</button>
+            <button class="button-1" v-if="!appData.showSidoUpdateForm" @click="verifyPlease()" >Update</button>
           </div>
         </div>
       </div>

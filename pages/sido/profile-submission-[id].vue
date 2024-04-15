@@ -46,8 +46,6 @@ function toogleAccordion4() {
 const applicantStore = useApplicantStore();
 await applicantStore.applicationBeforeSubmit(id)
 application.value = applicantStore.dataOnSubmitApplication
-
-
 </script>
 <template>
   <section class="dosoft-faq-section">

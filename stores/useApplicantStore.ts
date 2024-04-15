@@ -4,6 +4,7 @@ type ApplicantProfile = {
     data: ApplicantInfo
 }
 type ApplicantInfo = {
+  action:string,
   id: string
   fullName:string,
   birthYear:string,
@@ -31,12 +32,13 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     const appData = useAppDataStore()
 
     //Saving Applicant Profile Info 
-    async function createApplicantProfile(info: ApplicantProfile){
+    async function createApplicantProfile(info: ApplicantInfo){
+        const postAction = info.action        
         appData.toogleLoading()
         await useApiFetch('/sanctum/csrf-cookie');
-        const {data, error} = await useApiFetch('/api/create-applicant-profile',{
+        const {data, error} = await useApiFetch(`/api/${postAction}-applicant-profile`,{
           method: 'POST',
-          body: info as ApplicantProfile
+          body: info as ApplicantInfo
         });
         // console.log(data.value);
         if(data.value){
@@ -46,7 +48,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
             saveError.value = null
             // next Form
             appData.AssignNotificationMessage(applicantProfile.value?.message)
-            navigateTo(`/sido/create-business-profile-${applicantProfile.value?.data.id}`)
+            navigateTo(`/sido/${postAction}-business-profile-${applicantProfile.value?.data.id}`)
           }
           else{
             appData.toogleLoading()

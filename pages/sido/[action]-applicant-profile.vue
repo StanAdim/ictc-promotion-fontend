@@ -6,7 +6,9 @@ definePageMeta({
 useHead({
   title:'Applicant profile'
 })
+const route = useRoute() 
 const formData = ref({
+  action: route.params.action,
   fullName: '',
   birthYear: 'none',
   nidaNumber: '',
@@ -41,9 +43,9 @@ const showSaveBtn = ref(false)
 const verifyPlease = ()=>{  showSaveBtn.value = true}
 
 // EDIT profile Controllers
-const route = useRoute() 
 if(route.params.action == 'update' &&  applicantStore.applicantProfile){
   formData.value = applicantStore.applicantProfile?.data
+  formData.value.action = route.params.action
 }
 </script>
 
@@ -91,12 +93,12 @@ if(route.params.action == 'update' &&  applicantStore.applicantProfile){
                             </div>
                             <div class="col-md-6">
                                 <label for="phoneNumber">Phone Number</label>
-                                <input type="text" id="phoneNumber"
+                                <input type="text" id="phoneNumber" :readonly="route.params.action == 'update'"
                                  v-model="formData.phoneNumber" placeholder="+255..">
                             </div>
                             <div class="col-md-6">
                                 <label for="email">E-mail</label>
-                                <input type="text" id="email"
+                                <input type="text" id="email" :readonly="route.params.action == 'update'" 
                                 v-model="formData.email" placeholder="Your Email">
                             </div>
                             <div class="col-md-12">

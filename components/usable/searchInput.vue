@@ -1,7 +1,7 @@
 <script setup>
 const appData = useAppDataStore()
 const dataForm = ref({
-    searchInput: 'VY7-FJYP'
+    searchInput: 'E29-HVGN'
 })
 const applicantStore = useApplicantStore()
 async function handleSearch (){

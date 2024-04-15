@@ -1,5 +1,6 @@
 export const useAppDataStore = defineStore('appData', () => {
   const isloading = ref(false);
+  const showSidoUpdateForm = ref(false)
   const sidoApplicationCode = ref('APP-CODE');
   const notificationMessage = ref('')
   const showMessage = ref(false)
@@ -47,10 +48,15 @@ export const useAppDataStore = defineStore('appData', () => {
     const setSidoApplicationCode = (message : string)=> {
       return sidoApplicationCode.value = message
     }  
+    const setSidoUpdateForm = (value : boolean)=> {
+      return showSidoUpdateForm.value = value
+    }  
+    
     return { 
        notificationMessage, AssignNotificationMessage, 
        showMessage,toogleShowMessage, eduLevels, 
        economySector, getYearsArray, 
+       showSidoUpdateForm,setSidoUpdateForm,
        setSidoApplicationCode,sidoApplicationCode,
        isloading, toogleLoading
       }

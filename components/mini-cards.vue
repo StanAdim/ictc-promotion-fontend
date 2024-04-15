@@ -1,7 +1,7 @@
 <script lang="ts" setup></script>
 
 <template>
- <section class="cloud-service-area pt-100 pb-70">
+ <section class="cloud-service-area my-4">
             <div class="container">
                 <div class="row justify-content-center">
                     <!-- Single -->
