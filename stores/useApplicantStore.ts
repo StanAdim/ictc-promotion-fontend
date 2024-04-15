@@ -66,6 +66,13 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     }
     return {data , error}
     }
+    async function submitApplication() {
+      console.log(`submitApplication`);
+      
+      return 123;
+    } 
 
-    return { applicantProfile, dataOnSubmitApplication, saveError , createApplicantProfile, applicationBeforeSubmit}
+    return { 
+      applicantProfile, dataOnSubmitApplication, submitApplication,
+      saveError , createApplicantProfile, applicationBeforeSubmit}
   })

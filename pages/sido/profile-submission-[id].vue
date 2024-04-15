@@ -45,7 +45,7 @@ function toogleAccordion4() {
 }
 const applicantStore = useApplicantStore();
 await applicantStore.applicationBeforeSubmit(id)
-application.value = applicantStore.OnSubmitApplication
+application.value = applicantStore.dataOnSubmitApplication
 
 
 </script>
@@ -57,7 +57,7 @@ application.value = applicantStore.OnSubmitApplication
           <div class="section-title mb-20 text-center">
             <h2>
               <i class="fa-regular fa-face-smile"></i>
-              {{ application?.data?.fullName }} Application Overview
+              <span class="deadline mx-2"> {{ application?.data?.fullName }}</span> Application Overview
               <i class="fa-regular fa-face-smile"></i>
             </h2>
             <div class="section-devider"></div>
@@ -171,7 +171,7 @@ application.value = applicantStore.OnSubmitApplication
             </div>
           </div>
           <div class="m-2" v-if="submittionButton">
-            <button class="button-1" type="submit">Submit Application</button>
+            <button class="button-1" @click.prevent="applicantStore.submitApplication">Submit Application</button>
           </div>
         </div>
       </div>
