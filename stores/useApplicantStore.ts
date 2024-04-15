@@ -15,6 +15,7 @@ type ApplicantInfo = {
   businessSector:string,
   businessName:string,
   businessLocation:string,
+  applicationCode:string,
 }
 type Application = {
   message: String,
@@ -41,6 +42,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         if(data.value){
             appData.toogleLoading()
             applicantProfile.value = data.value as ApplicantProfile
+            appData.setSidoApplicationCode(applicantProfile.value?.data?.applicationCode)
             saveError.value = null
             // next Form
             appData.AssignNotificationMessage(applicantProfile.value?.message)

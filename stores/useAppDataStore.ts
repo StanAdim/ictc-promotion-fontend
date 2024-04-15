@@ -1,5 +1,6 @@
 export const useAppDataStore = defineStore('appData', () => {
   const isloading = ref(false);
+  const sidoApplicationCode = ref('APP-CODE');
   const notificationMessage = ref('')
   const showMessage = ref(false)
   const eduLevels = [
@@ -30,7 +31,9 @@ export const useAppDataStore = defineStore('appData', () => {
       return yearsArray;
     })
     // toogle laoding 
-    const toogleLoading = ()=> isloading.value ? isloading.value = false : isloading.value = true
+    const toogleLoading = ()=> {
+      isloading.value ? isloading.value = false : isloading.value = true
+    }
     const toogleShowMessage = ()=> {
       showMessage.value ? showMessage.value = false : showMessage.value = true
       setTimeout(function() {
@@ -41,5 +44,14 @@ export const useAppDataStore = defineStore('appData', () => {
       notificationMessage.value = message
       toogleShowMessage();
     }  
-    return { notificationMessage, AssignNotificationMessage, showMessage,toogleShowMessage, eduLevels, economySector, getYearsArray, isloading, toogleLoading}
+    const setSidoApplicationCode = (message : string)=> {
+      return sidoApplicationCode.value = message
+    }  
+    return { 
+       notificationMessage, AssignNotificationMessage, 
+       showMessage,toogleShowMessage, eduLevels, 
+       economySector, getYearsArray, 
+       setSidoApplicationCode,sidoApplicationCode,
+       isloading, toogleLoading
+      }
   })

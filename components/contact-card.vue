@@ -1,6 +1,6 @@
 <template>
   <div class="contact-detail">
-    <h2>Our contact details</h2>
+    <h2>Support Contacts</h2>
     <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse.</p> -->
     <div class="contact-detail-list">
       <ul>

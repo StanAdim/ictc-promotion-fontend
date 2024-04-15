@@ -1,4 +1,5 @@
 <script setup>
+const appData = useAppDataStore()
 const dataForm = ref({
     searchInput: 'VY7-FJYP'
 })

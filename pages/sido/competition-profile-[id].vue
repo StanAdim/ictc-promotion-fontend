@@ -50,6 +50,9 @@ const verifyPlease = ()=>{
                 <div class="contact-form">
                     <h2>Competition Status <i class="fa-solid fa-people-group"></i></h2>
                     <form id="contact-form" @submit.prevent="handleForm()">
+                        <div class="flex justify-center mx-auto my-4 text-xl bg-lime-300 py-2 px-1">
+                            <usable-paragraph :key-name=" `${appData.sidoApplicationCode} ` " data="Please Note: Your Application Code" :has-hr="false" />
+                        </div>
                         <div class="row">
                             <div class="col-md-8">
                                 <label for="competitors">Who are the competitors <span class="addNewInput">Add competitor <i class="fa-solid fa-plus"></i></span></label>

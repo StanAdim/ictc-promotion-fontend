@@ -114,6 +114,7 @@ application.value = applicantStore.dataOnSubmitApplication
               <h3 class="text-lg font-bold text-gray-900 mb-2">
                 Personal Information
               </h3>
+              <UsableParagraph key-name="Application Code" :data="application?.data.applicationCode" :has-hr="false" />
               <UsableParagraph key-name="Name" :data="application?.data.fullName" :has-hr="false" />
               <template v-if="application?.data"><UsableParagraph  key-name="Age" :data="nowDate.getFullYear() - application?.data.birthYear" :has-hr="false" /></template>
               <UsableParagraph key-name="NIDA Number" :data="application?.data.nidaNumber" :has-hr="false" />
