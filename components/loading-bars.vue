@@ -16,7 +16,7 @@
   padding: .4rem;
   top: 2.4rem;
   height: 30vh;
-  background-color: #a8847437;
+  background-color: #ebd5cb37;
 }
 
 .arc {

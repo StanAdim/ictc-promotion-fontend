@@ -21,14 +21,15 @@ const formData = ref({
 const hasError = ref(false);
 const validationError = ref(null);
 const appData = useAppDataStore()
-const applicantProfile = useApplicantStore()
+const applicantStore = useApplicantStore()
+
 // handle the form
 const  handleForm = async ()=> {
   showSaveBtn.value = false;
-   await applicantProfile.createApplicantProfile(formData.value)
-  if(applicantProfile.saveError){
+   await applicantStore.createApplicantProfile(formData.value)
+  if(applicantStore.saveError){
     hasError.value = true
-    validationError.value = applicantProfile.saveError
+    validationError.value = applicantStore.saveError
   }
   else{
     validationError.value = null
@@ -37,8 +38,12 @@ const  handleForm = async ()=> {
   }
 }
 const showSaveBtn = ref(false)
-const verifyPlease = ()=>{
-    showSaveBtn.value = true;
+const verifyPlease = ()=>{  showSaveBtn.value = true}
+
+// EDIT profile Controllers
+const route = useRoute() 
+if(route.params.action == 'update' &&  applicantStore.applicantProfile){
+  formData.value = applicantStore.applicantProfile?.data
 }
 </script>
 
@@ -125,7 +130,10 @@ const verifyPlease = ()=>{
                                 hover:border round px-20 text-slate-100" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
                                 <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
                                         <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <button class="button-1" type="submit">Save and Continue</button>
+                                    <button class="button-1" type="submit">
+                                      <span v-if="route.params.action == 'create'">Save and Continue</span>
+                                      <span v-if="route.params.action == 'update'">Update and Continue</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>

@@ -44,7 +44,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
             saveError.value = null
             // next Form
             appData.AssignNotificationMessage(applicantProfile.value?.message)
-            navigateTo(`/sido/business-profile-create-${applicantProfile.value?.data.id}`)
+            navigateTo(`/sido/create-business-profile-${applicantProfile.value?.data.id}`)
           }
           else{
             appData.toogleLoading()
@@ -71,8 +71,22 @@ export const useApplicantStore = defineStore('applicantStore', () => {
       
       return 123;
     } 
+    async function captureApplication(applicationKey:string) {      
+      appData.toogleLoading()
+      const {data, error} = await useApiFetch(`/api/get-application-profile/${applicationKey}`)
+      if(data.value){
+        appData.toogleLoading()
+        applicantProfile.value = data.value as ApplicantProfile
+        navigateTo('/sido/update-applicant-profile')
+      }
+      console.log(data.value);
+      return { data,error }
+    }
 
     return { 
-      applicantProfile, dataOnSubmitApplication, submitApplication,
-      saveError , createApplicantProfile, applicationBeforeSubmit}
+      applicantProfile, dataOnSubmitApplication, 
+      submitApplication,captureApplication, 
+      saveError , createApplicantProfile, 
+      applicationBeforeSubmit
+    }
   })
