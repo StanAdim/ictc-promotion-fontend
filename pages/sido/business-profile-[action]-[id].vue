@@ -16,7 +16,15 @@ const validationError = ref(null);
 const businessProfile = useBusinessStore()
 const appData = useAppDataStore()
 // handle the form
+const businessStore = useBusinessStore()
+if(route.params.action == 'edit'){
+    const {data} = await businessStore.fetchBusinessData(route.params.id);
+    if(data){
+        formData.value = businessStore.retrivedBusinessProfile?.data 
+    }
+}
 const  handleForm = async ()=> {
+    showSaveBtn.value = false;
     await businessProfile.createBusinessProfile(formData.value)
     if(businessProfile.saveError){
         validationError.value = businessProfile.saveError
@@ -29,13 +37,17 @@ const  handleForm = async ()=> {
         // formData.value = null
     }
 }
+const showSaveBtn = ref(false)
+const verifyPlease = ()=>{
+    showSaveBtn.value = true;
+}
 </script>
 
 <template>
 <!-- Start  Form -->
 <div class="absolute top-10 left-5">
   <template v-if="hasError">
-      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="hasError"/>
+      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="!hasError"/>
   </template>
 </div>
 <section class="contact-area">
@@ -50,7 +62,7 @@ const  handleForm = async ()=> {
                         <div class="row">
                             <div class="col-md-12">
                                 <label for="background">Applicant Background</label>
-                                <textarea v-model="formData.background" id="background" 
+                                <textarea v-model="(formData.background  )" id="background" 
                                 placeholder="Brief: Tell us about your Background"></textarea>
                             </div>
                             <div class="col-md-12">
@@ -73,8 +85,13 @@ const  handleForm = async ()=> {
                                 <textarea v-model="formData.marketSize" id="marketSize" 
                                 placeholder="Tell us about your market size and the targeted market"></textarea>
                             </div>
-                            <div class="col-12">
-                                <button class="button-1" type="submit">Save and Continue</button>
+                            <div class="col-12" >
+                                <button class=" bg-blue-400 text-red-50 py-2 text-xl hover:text-white hover:bg-blue-500 
+                                hover:border round px-20 text-cyan-900" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
+                                <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
+                                        <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
+                                    <button class="button-1" type="submit">Save and Continue</button>
+                                </div>
                             </div>
                         </div>
                     </form>

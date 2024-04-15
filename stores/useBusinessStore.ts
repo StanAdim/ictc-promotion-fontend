@@ -2,6 +2,7 @@
 type BusinessProfile = {
     message: string,
     data : BusinessData
+    code: number
 }
 type BusinessData = {
     applicationCode:string,
@@ -11,12 +12,11 @@ type BusinessData = {
     prototypeDescription:string,
     marketSize:string,
 }
-
-
 export const useBusinessStore = defineStore('businesProfileStore', () => {
     const businessProfile = ref < BusinessProfile | null>(null)
     const saveError = ref <any>(null)
     const appData = useAppDataStore()
+    const retrivedBusinessProfile = ref <BusinessProfile | null>(null)
 
     //Saving Applicant Profile Info 
     async function createBusinessProfile(info: BusinessData){
@@ -41,6 +41,17 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
         }
         return { data,error};
     }
+    async function fetchBusinessData(applicationCode:string) {
+      // await useApiFetch('/sanctum/csrf-cookie');
+      const {data , error} =  await useApiFetch(`/api/get-business-profile/${applicationCode}`);
+      if(data){
+        retrivedBusinessProfile.value = data.value as BusinessProfile
+      }
+        // console.log(retrivedBusinessProfile.value?.data);
+      return {data, error}
+    }
 
-    return { businessProfile,saveError , createBusinessProfile}
+    return { 
+      businessProfile,saveError , retrivedBusinessProfile,
+      createBusinessProfile, fetchBusinessData}
   })

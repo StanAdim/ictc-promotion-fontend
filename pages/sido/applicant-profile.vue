@@ -24,6 +24,7 @@ const appData = useAppDataStore()
 const applicantProfile = useApplicantStore()
 // handle the form
 const  handleForm = async ()=> {
+  showSaveBtn.value = false;
    await applicantProfile.createApplicantProfile(formData.value)
   if(applicantProfile.saveError){
     hasError.value = true
@@ -35,13 +36,17 @@ const  handleForm = async ()=> {
     // formData.value = null
   }
 }
+const showSaveBtn = ref(false)
+const verifyPlease = ()=>{
+    showSaveBtn.value = true;
+}
 </script>
 
 <template>
 <!-- Start  Form -->
 <div class="absolute top-10 left-5">
   <template v-if="hasError">
-      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="hasError"/>
+      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="!hasError"/>
   </template>
 </div>
 <section class="contact-area">
@@ -115,12 +120,13 @@ const  handleForm = async ()=> {
                                   </select>                                    
                               </div>
                             </template>
-                            <!-- <div class="col-md-12">
-                              <label for="">Business Economy Sector</label>
-                                <textarea v-model="formData.name" placeholder="Write out"></textarea>
-                            </div> -->
-                            <div class="col-12">
-                                <button class="button-1" type="submit">Save and Continue</button>
+                            <div class="col-12" >
+                                <button class=" bg-blue-400 text-red-50 py-2 text-xl hover:text-white hover:bg-blue-500 
+                                hover:border round px-20 text-cyan-900" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
+                                <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
+                                        <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
+                                    <button class="button-1" type="submit">Save and Continue</button>
+                                </div>
                             </div>
                         </div>
                     </form>

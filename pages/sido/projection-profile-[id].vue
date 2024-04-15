@@ -19,6 +19,7 @@ const businessProjection = useProjectionStore()
 const appData = useAppDataStore()
 // handle the form
 const  handleForm = async ()=> {
+    showSaveBtn.value = true;
     await businessProjection.createProjectionDetail(formData.value)
     if(businessProjection.saveError){
         validationError.value = businessProjection.saveError
@@ -27,11 +28,12 @@ const  handleForm = async ()=> {
     else{
         validationError.value = null
         hasError.value = false;
-        // formData.value = null
     }
-//   console.log(formData.value)
 }
-
+const showSaveBtn = ref(false)
+const verifyPlease = ()=>{
+    showSaveBtn.value = true;
+}
 </script>
 <template>
     <!-- Start  Form -->
@@ -86,8 +88,13 @@ const  handleForm = async ()=> {
                                 <input type="text" 
                                 v-model="formData.challenges" id="challenges" placeholder="Add challenge">
                             </div>
-                            <div class="col-12">
-                                <button class="button-1" type="submit">Save and Continue</button>
+                            <div class="col-12" >
+                                <button class=" bg-blue-400 text-red-50 py-2 text-xl hover:text-white hover:bg-blue-500 
+                                hover:border round px-20 text-cyan-900" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
+                                <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
+                                        <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
+                                    <button class="button-1" type="submit">Save and Continue</button>
+                                </div>
                             </div>
                         </div>
                     </form>

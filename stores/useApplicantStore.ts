@@ -19,10 +19,8 @@ type ApplicantInfo = {
 type Application = {
   message: String,
   data:{
-
   }
 }
-
 
 export const useApplicantStore = defineStore('applicantStore', () => {
     const applicantProfile = ref < ApplicantProfile | null>(null)
@@ -46,7 +44,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
             saveError.value = null
             // next Form
             appData.AssignNotificationMessage(applicantProfile.value?.message)
-            navigateTo(`/sido/business-profile-${applicantProfile.value?.data.id}`)
+            navigateTo(`/sido/business-profile-create-${applicantProfile.value?.data.id}`)
           }
           else{
             appData.toogleLoading()
