@@ -5,6 +5,7 @@ type BusinessProfile = {
     code: number
 }
 type BusinessData = {
+    action: string,
     applicationCode:string,
     background:string,
     marketProblem:string,
@@ -20,9 +21,10 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
 
     //Saving Applicant Profile Info 
     async function createBusinessProfile(info: BusinessData){
+      const postAction = info.action as string       
         appData.toogleLoading()
         await useApiFetch('/sanctum/csrf-cookie');                
-        const {data,error} = await useApiFetch(`/api/create-business-profile/${info.applicationCode}`,{
+        const {data,error} = await useApiFetch(`/api/${postAction}-business-profile/${info.applicationCode}`,{
           method: 'POST',
           body: info as BusinessData
         });
@@ -33,7 +35,7 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
             saveError.value = null
             //Move next Form
             appData.AssignNotificationMessage(businessProfile.value?.message)
-            navigateTo(`/sido/create-competition-profile-${businessProfile.value?.data.applicationCode}`)
+            navigateTo(`/sido/${postAction}-competition-profile-${businessProfile.value?.data.applicationCode}`)
           }
           else{
             appData.toogleLoading()
@@ -42,10 +44,12 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
         return { data,error};
     }
     async function fetchBusinessData(applicationCode:string) {
-      // await useApiFetch('/sanctum/csrf-cookie');
       const {data , error} =  await useApiFetch(`/api/get-business-profile/${applicationCode}`);
       if(data){
         retrivedBusinessProfile.value = data.value as BusinessProfile
+      }
+      else{
+        saveError.value = error.value?.message as string
       }
         // console.log(retrivedBusinessProfile.value?.data);
       return {data, error}

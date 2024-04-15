@@ -7,6 +7,7 @@ definePageMeta({
 })
 const route = useRoute()
 const formData = ref({
+    action : route.params.action,
     applicationCode: route.params.id,
     background:'',
     marketProblem:'',
@@ -20,10 +21,12 @@ const businessProfile = useBusinessStore()
 const appData = useAppDataStore()
 // handle the form
 const businessStore = useBusinessStore()
-if(route.params.action == 'edit'){
+if(route.params.action == 'update'){
     const {data} = await businessStore.fetchBusinessData(route.params.id);
-    if(data){
+    if(data.value){
         formData.value = businessStore.retrivedBusinessProfile?.data 
+        formData.value.id = businessStore.retrivedBusinessProfile?.data.id
+        formData.value.action = route.params.action
     }
 }
 const  handleForm = async ()=> {
@@ -92,11 +95,14 @@ const verifyPlease = ()=>{
                                 placeholder="Tell us about your market size and the targeted market"></textarea>
                             </div>
                             <div class="col-12" >
-                                <button class=" bg-blue-400 py-2 text-xl hover:text-white hover:bg-blue-500 
+                                <button class=" bg-blue-400  py-2 text-xl hover:text-white hover:bg-blue-500 
                                 hover:border round px-20 text-slate-100" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
                                 <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
                                         <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <button class="button-1" type="submit">Save and Continue</button>
+                                    <button class="button-1" type="submit">
+                                      <span v-if="route.params.action == 'create'">Save and Continue</span>
+                                      <span v-if="route.params.action == 'update'">Update and Continue</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
