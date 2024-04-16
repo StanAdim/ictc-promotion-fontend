@@ -18,11 +18,11 @@ const hideError = ()=> {
 <template>
   <div
     id="toast-success"
-    :class="{'hidden': isHidden, ' bg-red-600':isFailed, ' bg-green-600 text-xl px-5 py-3 ':isSucceed}"
-    class="flex justify-center items-center w-full max-w-xs p-2 my-2  text-white rounded-lg shadow  z-9000"
+    :class="{'hidden': isHidden, ' bg-red-600 py-2 ':isFailed, ' bg-green-600 text-2xl px-4 py-2 ':isSucceed}"
+    class="flex justify-center items-center w-full max-w-xs  my-2  text-white rounded-lg shadow  z-10000"
     role="alert"
   >
-    <div class="ms-3 text-sm font-normal">{{message}}</div>
+    <div class="ms-3 text-sm font-normal"> {{message}} </div>
     <button
       type="button"
       @click.prevent="hideError"

@@ -37,7 +37,7 @@ export const useCompetitionStore = defineStore('competitionStore', () => {
             saveError.value = null
             //Move next Form
             appData.AssignNotificationMessage(competitionDetail.value?.message)
-            // navigateTo(`/sido/create-projection-profile-${competitionDetail.value.data?.applicationCode}`)
+            navigateTo(`/sido/${postAction}-projection-profile-${competitionDetail.value.data?.applicationCode}`)
           }
           else{
             appData.toogleLoading()
@@ -49,8 +49,7 @@ export const useCompetitionStore = defineStore('competitionStore', () => {
       const {data , error} =  await useApiFetch(`/api/get-competition-details/${applicationCode}`);
       if(data){        
         retrieveCompetitionDetail.value = data.value as CompetitionDetail
-        console.log(retrieveCompetitionDetail.value);
-        
+        // console.log(retrieveCompetitionDetail.value);
         appData.AssignNotificationMessage(retrieveCompetitionDetail.value.message)
       }
       else{

@@ -6,6 +6,7 @@ type ProjectionDetail = {
 }
 type ProjectionData = {
     action:string,
+    id:string,
     applicationCode:string,
     expectedRevenue:string,
     machineEquipment:string,
@@ -18,6 +19,7 @@ type ProjectionData = {
 
 export const useProjectionStore = defineStore('projectionStore', () => {
     const projectionDetail = ref < ProjectionDetail | null>(null)
+    const retriveProjectionDetail = ref < ProjectionDetail | null>(null)
     const saveError = ref <any>(null)
     const appData = useAppDataStore()
     const  applicantStore = useApplicantStore()
@@ -48,19 +50,25 @@ export const useProjectionStore = defineStore('projectionStore', () => {
         }
         return { data,error};
     }
-    async function fetchProjectioDetails(projectionUuid:string) {      
-      const {data , error} =  await useApiFetch(`/api/get-projection-details/${projectionUuid}`);
-      if(data){
-        projectionDetail.value = data.value as ProjectionDetail
+
+    //Fetching the Single Projection
+    async function fetchProjectionDetails(applicationCode:string) {
+      const {data , error} =  await useApiFetch(`/api/get-projection-detail/${applicationCode}`);      
+      if(data){        
+        retriveProjectionDetail.value = data.value as ProjectionDetail
+        // console.log(retriveProjectionDetail.value);
+        appData.AssignNotificationMessage(retriveProjectionDetail.value.message)
       }
       else{
         saveError.value = error.value?.message as string
       }
         // console.log(retrivedBusinessProfile.value?.data);
+      return {data, error}
     }
 
+    //General Return
     return { 
       projectionDetail, saveError, 
-      fetchProjectioDetails,
+      fetchProjectionDetails,retriveProjectionDetail,
       createProjectionDetail}
   })

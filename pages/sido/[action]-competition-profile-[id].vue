@@ -31,7 +31,6 @@ if(route.params.action == 'update'){
 // handle the form
 const  handleForm = async ()=> {
     showSaveBtn.value = false;
-    console.log(formData.value);
     await competitionStore.createCompetitionDetail(formData.value)
     if(competitionStore.saveError){
         validationError.value = competitionStore.saveError
@@ -94,7 +93,10 @@ const verifyPlease = ()=>{
                                 hover:border round px-20 text-slate-100" @click.prevent="verifyPlease" v-if="!showSaveBtn">Save</button>
                                 <div class=" bg-slate-50 p-3 m-2 rounded" v-if="showSaveBtn">
                                         <span class=" bg-red-200 text-xl py-2 px-3 rounded-md">Confirm your Details<i class="fa-solid fa-triangle-exclamation"></i></span>
-                                    <button class="button-1" type="submit">Save and Continue</button>
+                                    <button class="button-1" type="submit">
+                                      <span v-if="route.params.action == 'create'">Save and Continue</span>
+                                      <span v-if="route.params.action == 'update'">Update and Continue</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
