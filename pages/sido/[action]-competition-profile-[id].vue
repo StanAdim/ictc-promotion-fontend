@@ -5,7 +5,8 @@ useHead({
 })
 const formData = ref({
     applicationCode: route.params.id,
-    action: route.params.action,
+    id: '',
+    action: 'create',
     competitors:'',
     competitiveAdvantage:'',
     marketStrategy:'',
@@ -19,8 +20,8 @@ const appData = useAppDataStore()
 if(route.params.action == 'update'){
     const {data} = await competitionStore.fetchCompetitinDetails(route.params.id);
     if(data.value?.code == 200){
-        formData.value = competitionStore.retrivedcompetition?.data 
-        formData.value.id = competitionStore.retrivedcompetition?.data.id
+        formData.value = competitionStore.retrieveCompetitionDetail?.data 
+        formData.value.id = competitionStore.retrivedcompetition?.data.uuid
         formData.value.action = route.params.action
     }
     if(data.value?.code == 300){
@@ -30,6 +31,7 @@ if(route.params.action == 'update'){
 // handle the form
 const  handleForm = async ()=> {
     showSaveBtn.value = false;
+    console.log(formData.value);
     await competitionStore.createCompetitionDetail(formData.value)
     if(competitionStore.saveError){
         validationError.value = competitionStore.saveError

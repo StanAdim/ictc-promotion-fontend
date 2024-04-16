@@ -44,7 +44,7 @@ export const useBusinessStore = defineStore('businesProfileStore', () => {
         return { data,error};
     }
     async function fetchBusinessData(applicationCode:string) {
-      const {data } =  await useApiFetch(`/api/get-business-profile/${applicationCode}`);
+      const { data } =  await useApiFetch(`/api/get-business-profile/${applicationCode}`);
       retrivedBusinessProfile.value = data.value as BusinessProfile      
       appData.AssignNotificationMessage(retrivedBusinessProfile.value.message)
       // navigateTo(`/sido/${action.value}-business-profile-${applicationCode}`)
