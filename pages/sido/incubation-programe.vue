@@ -28,35 +28,7 @@ const verifyPlease = ()=>{
 </script>
 
 <template>
-  <!-- <section class="hero-area">
-    <div class="shap-1"></div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="hero-caption">
-            <div class="hero-caption-full pt-100">
-              <h2>SIDO Incubation Programme</h2>
-              <div class="partner-logo">
-                <nuxt-link to="/">
-                  <img src="/logo/sido.png" alt="" />
-                </nuxt-link>
-              </div>
-              <p>Application for individuals with Innovative Ideas to participate in SIDO incubation Program.</p>
-              <div class="hero-btn mt-30">
-                <nuxt-link to="/sido/applicant-profile" class="button-1">Start Now</nuxt-link>
-                </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="hero-img">
-            <img src="assets/img/banner.svg" alt="hero-img" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section> -->
-  <!-- Start Features Box Area -->
+
   <section class="awesome-features ">
     <div class="container">
       <div class="row">
@@ -72,7 +44,7 @@ const verifyPlease = ()=>{
       </div>
       <div class="row justify-content-center">
         <loading-bars v-if="appData.isloading" />
-        <div class="my-4 mx-2 left-1/4" v-if="appData.showSidoUpdateForm">
+        <div class="my-5 mx-2" v-if="appData.showSidoUpdateForm">
           <usable-search-input />
         </div>
         <div class="col-md-10 my-2 bg" v-if="!appData.showSidoUpdateForm">    

@@ -5,7 +5,11 @@ const dataForm = ref({
 })
 const applicantStore = useApplicantStore()
 async function handleSearch (){
-    await applicantStore.captureApplication(dataForm.value.searchInput)
+    if(dataForm.value.searchInput != ''){
+        await applicantStore.captureApplication(dataForm.value.searchInput)
+    }
+    appData.AssignNotificationMessage('Application Code: Required')
+    return
 }
 </script> 
 <template>

@@ -1,5 +1,6 @@
 export const useAppDataStore = defineStore('appData', () => {
   const isloading = ref(false);
+  const drawerState = ref(false);
   const showSidoUpdateForm = ref(false)
   const sidoApplicationCode = ref('APP-CODE');
   const notificationMessage = ref('')
@@ -32,8 +33,11 @@ export const useAppDataStore = defineStore('appData', () => {
       return yearsArray;
     })
     // toogle laoding 
+    const toogleDrawerState = ()=> {
+      return drawerState.value = !drawerState.value
+    }
     const toogleLoading = ()=> {
-      isloading.value ? isloading.value = false : isloading.value = true
+     return  isloading.value  = !isloading.value
     }
     const toogleShowMessage = ()=> {
       showMessage.value ? showMessage.value = false : showMessage.value = true
@@ -58,6 +62,7 @@ export const useAppDataStore = defineStore('appData', () => {
        economySector, getYearsArray, 
        showSidoUpdateForm,setSidoUpdateForm,
        setSidoApplicationCode,sidoApplicationCode,
-       isloading, toogleLoading
+       isloading, toogleLoading,
+       toogleDrawerState,drawerState
       }
   })

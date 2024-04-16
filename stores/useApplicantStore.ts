@@ -79,19 +79,21 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     } 
     async function captureApplication(applicationKey:string) {      
       appData.toogleLoading()
-      const {data, error} = await useApiFetch(`/api/get-applicant-profile/${applicationKey}`)
-      applicantProfile.value = data.value as ApplicantProfile
-      const action = ref('update')
-      const message = ref('')
-      if(applicantProfile.value.code == 300){
-        action.value = 'create'
+      const {data} = await useApiFetch(`/api/get-applicant-details/code-${applicationKey}`)
+      if(data.value){
         appData.toogleLoading()
+        applicantProfile.value = data.value as ApplicantProfile
+        const action = ref('update')
+        const message = ref('')
+        if(applicantProfile.value.code == 300){
+          appData.AssignNotificationMessage(applicantProfile.value.message)
+          return
+        }
+        message.value = `${applicantProfile.value.message}`
+        appData.AssignNotificationMessage(message.value)
+        navigateTo(`/sido/${action.value}-applicant-profile`)
+        return { data }
       }
-      message.value = `${applicantProfile.value.message}`
-      appData.toogleLoading()
-      appData.AssignNotificationMessage(message.value)
-      navigateTo(`/sido/${action.value}-applicant-profile`)
-      return { data,error }
     }
 
     return { 
