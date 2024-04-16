@@ -40,6 +40,22 @@ export const useCompetitionStore = defineStore('competitionStore', () => {
         }
         return { data,error};
     }
+    async function fetchCompetitinDetails(applicationCode:string) {
+      const {data , error} =  await useApiFetch(`/api/get-competition-details/${applicationCode}`);
+      if(data){
+        competitionDetail.value = data.value as CompetitionDetail
+      }
+      else{
+        saveError.value = error.value?.message as string
+      }
+        // console.log(retrivedBusinessProfile.value?.data);
+      return {data, error}
+    }
 
-    return { competitionDetail,saveError , createCompetitionDetail}
+
+    return { 
+      competitionDetail,
+      fetchCompetitinDetails,
+      saveError , 
+      createCompetitionDetail}
   })

@@ -3,11 +3,11 @@ useHead({
   title:'Business Profile'
 })
 definePageMeta({
-    middleware: 'code-checker'
+    // middleware: 'code-checker'
 })
 const route = useRoute()
 const formData = ref({
-    action : route.params.action,
+    action : 'create',
     applicationCode: route.params.id,
     background:'',
     marketProblem:'',
@@ -23,10 +23,14 @@ const appData = useAppDataStore()
 const businessStore = useBusinessStore()
 if(route.params.action == 'update'){
     const {data} = await businessStore.fetchBusinessData(route.params.id);
-    if(data.value){
+    // console.log(businessStore.retrivedBusinessProfile);
+    if(data.value?.code == 200){
         formData.value = businessStore.retrivedBusinessProfile?.data 
         formData.value.id = businessStore.retrivedBusinessProfile?.data.id
         formData.value.action = route.params.action
+    }
+    if(data.value.code == 300){
+        formData.value.action = 'create'
     }
 }
 const  handleForm = async ()=> {

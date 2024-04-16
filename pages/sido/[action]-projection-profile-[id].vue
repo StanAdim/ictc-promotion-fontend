@@ -5,6 +5,7 @@ useHead({
 })
 const formData = ref({
     applicationCode: route.params.id,
+    action: route.params.action,
     expectedRevenue:'',
     machineEquipment:'',
     workingCapital:'',
@@ -29,6 +30,10 @@ const  handleForm = async ()=> {
         validationError.value = null
         hasError.value = false;
     }
+}
+// On update projection
+if(route.params.action == 'update'){
+    console.log(route.params.action);
 }
 const showSaveBtn = ref(false)
 const verifyPlease = ()=>{

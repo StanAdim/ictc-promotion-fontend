@@ -2,6 +2,7 @@
 type ApplicantProfile = {
     message: string,
     data: ApplicantInfo
+    code : number
 }
 type ApplicantInfo = {
   action:string,
@@ -33,7 +34,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
 
     //Saving Applicant Profile Info 
     async function createApplicantProfile(info: ApplicantInfo){
-        const postAction = info.action        
+        let postAction = info.action        
         appData.toogleLoading()
         await useApiFetch('/sanctum/csrf-cookie');
         const {data, error} = await useApiFetch(`/api/${postAction}-applicant-profile`,{
@@ -48,6 +49,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
             saveError.value = null
             // next Form
             appData.AssignNotificationMessage(applicantProfile.value?.message)
+            if(postAction != 'update'){postAction = 'create'}
             navigateTo(`/sido/${postAction}-business-profile-${applicantProfile.value?.data.id}`)
           }
           else{
@@ -58,7 +60,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     }
     async function applicationBeforeSubmit (uuid :string){
       appData.toogleLoading()
-      const {data, error} = useApiFetch(`/api/application-before-submission/${uuid}`)
+      const {data, error, refresh} = useApiFetch(`/api/application-before-submission/${uuid}`)
       if(data.value){
         appData.toogleLoading()
         dataOnSubmitApplication.value = data.value as Application
@@ -68,7 +70,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         appData.toogleLoading()
         if( error.value?.data) saveError.value = error.value?.data.errors
     }
-    return {data , error}
+    return {data , error, refresh}
     }
     async function submitApplication() {
       console.log(`submitApplication`);
@@ -77,13 +79,18 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     } 
     async function captureApplication(applicationKey:string) {      
       appData.toogleLoading()
-      const {data, error} = await useApiFetch(`/api/get-application-profile/${applicationKey}`)
-      if(data.value){
+      const {data, error} = await useApiFetch(`/api/get-applicant-profile/${applicationKey}`)
+      applicantProfile.value = data.value as ApplicantProfile
+      const action = ref('update')
+      const message = ref('')
+      if(applicantProfile.value.code == 300){
+        action.value = 'create'
         appData.toogleLoading()
-        applicantProfile.value = data.value as ApplicantProfile
-        navigateTo('/sido/update-applicant-profile')
       }
-      console.log(data.value);
+      message.value = `${applicantProfile.value.message}`
+      appData.toogleLoading()
+      appData.AssignNotificationMessage(message.value)
+      navigateTo(`/sido/${action.value}-applicant-profile`)
       return { data,error }
     }
 

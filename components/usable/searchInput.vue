@@ -1,7 +1,7 @@
 <script setup>
 const appData = useAppDataStore()
 const dataForm = ref({
-    searchInput: 'DQR-GGKL'
+    searchInput: ''
 })
 const applicantStore = useApplicantStore()
 async function handleSearch (){
@@ -12,7 +12,7 @@ async function handleSearch (){
     <form @submit.prevent="handleSearch">
         <div class="search-wrapper active">
             <div class="input-holder ">
-                <input type="text" class="search-input" v-model="dataForm.searchInput" placeholder="Application Code" />
+                <input type="text" class="search-input" v-model="dataForm.searchInput" placeholder="Your Code" />
                 <button class="search-icon" type="submit"><i class="fa-solid deadline fa-magnifying-glass fa-2xl"></i></button>
             </div>
         </div>
