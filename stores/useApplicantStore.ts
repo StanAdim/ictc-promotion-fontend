@@ -27,6 +27,7 @@ type Application = {
 
 export const useApplicantStore = defineStore('applicantStore', () => {
     const applicantProfile = ref < ApplicantProfile | null>(null)
+    const allApplicants = ref <any>([]);
     const saveError = ref <any>(null)
     const dataOnSubmitApplication = ref<any>(null)
     
@@ -95,11 +96,22 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         return { data }
       }
     }
+    //Fetch Applicant Store
+    async function  retriveApplicantProfiles() {
+      const {data} = await useApiFetch(`/api/retrieve-applicant-profiles`);
+      // console.log(data.value);
+      
+      if(data){
+        allApplicants.value = data.value as ApplicantInfo[]
+      }
+
+    }
 
     return { 
       applicantProfile, dataOnSubmitApplication, 
       submitApplication,captureApplication, 
       saveError , createApplicantProfile, 
+      retriveApplicantProfiles,allApplicants,
       applicationBeforeSubmit
     }
   })
