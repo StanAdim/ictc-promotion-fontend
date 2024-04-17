@@ -6,7 +6,7 @@ definePageMeta({})
 const appData = useAppDataStore();
 const router = useRoute();
 const id = router.params.id;
-const application = ref({})
+const application = ref(null)
 const openPersonal = ref(false);
 const openBusiness = ref(true);
 const openCompetition = ref(true);
@@ -44,8 +44,10 @@ function toogleAccordion4() {
   return (openProjection.value = false);
 }
 const applicantStore = useApplicantStore();
-await applicantStore.applicationBeforeSubmit(id)
-application.value = applicantStore.dataOnSubmitApplication
+if(!application.value){
+  await applicantStore.applicationBeforeSubmit(id)
+  application.value = applicantStore.dataOnSubmitApplication
+}
 </script>
 <template>
   <section class="dosoft-faq-section">
@@ -108,10 +110,7 @@ application.value = applicantStore.dataOnSubmitApplication
             <div
               class="p-6 bg-gray-50 text-medium dark:text-lime-900 dark:bg-teal-50 rounded-lg"
               :class="{ hide: openPersonal }"
-            >
-              <h3 class="text-lg font-bold text-gray-900 mb-2">
-                Personal Information
-              </h3>
+            ><h3 class="text-lg font-bold text-gray-900 mb-2">Personal Information</h3>
               <UsableParagraph key-name="Application Code" :data="application?.data.applicationCode" :has-hr="false" />
               <UsableParagraph key-name="Name" :data="application?.data.fullName" :has-hr="false" />
               <template v-if="application?.data"><UsableParagraph  key-name="Age" :data="nowDate.getFullYear() - application?.data.birthYear" :has-hr="false" /></template>

@@ -9,8 +9,10 @@ const currentYear = new Date().getFullYear();
 <div class="bg-gray-100 ">
   <!-- Nav Bar -->
   <AdminNavbar />
+  <UsableCustomSpinLoad v-if="appData.isloading" />
+
   <!-- Content -->
-<div class="container h-screen bg-blue-100 p-1">
+<div class="container mx-auto bg-blue-100 p-1">
   
         <slot />
 </div>

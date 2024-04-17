@@ -1,21 +1,25 @@
 <script  setup>
 const hideFilterOption = ref(true)
 const hideActionOption = ref(true)
+const hideInfo = ref(true)
+const currentYear = new Date().getFullYear();
+
 const applicantStore = useApplicantStore()
 const tableData = ref(null);
 if(!tableData.value){
   await applicantStore.retriveApplicantProfiles()
   tableData.value = applicantStore.allApplicants.data
-  console.log(tableData.value);
+  // console.log(tableData.value);
   
 }
 const toogleActionOption = ()=> {hideActionOption.value = !hideActionOption.value; hideFilterOption.value = true}
 const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.value; hideActionOption.value = true}
+
+
 </script>
 <template>
   <section class="bg-gray-50 p-3 sm:p-5">
-    <UsableCustomSpinLoad />
-    <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+    <div class="mx-auto w-full px-4 lg:px-12">
       <!-- Start coding here -->
       <div class="relative shadow-md sm:rounded-lg overflow-hidden">
         <!-- Top of the table -->
@@ -125,20 +129,22 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
             >
               <tr>
                 <th scope="col" class="px-4 py-3">sn</th>
+                <th scope="col" class="px-4 py-3">Code</th>
                 <th scope="col" class="px-4 py-3">Name</th>
                 <th scope="col" class="px-4 py-3">Email</th>
                 <th scope="col" class="px-4 py-3">Phone</th>
                 <th scope="col" class="px-4 py-3">Age</th>
                 <th scope="col" class="px-4 py-3">Has Business</th>
-                <th scope="col" class="px-4 py-3">
-                  <span class="sr-only">Actions</span>
-                </th>
+                <th scope="col" class="px-4 py-3">Stages 2 - 3 - 4 </th>
+                <th scope="col" class="px-4 py-3">Applied On</th>
+                <th scope="col" class="px-4 py-3">Actions</th>
               </tr>
             </thead>
             <tbody v-if="tableData">
               <tr  v-for="(item, index) in tableData" :key="item.id"
               class="border-b dark:border-gray-700">
               <td class="px-4 py-3">{{index + 1}}</td>
+              <td class="px-4 py-3">{{item.applicationCode}}</td>
                 <th 
                   scope="row"
                   class="px-4 font-medium text-gray-900 whitespace-nowrap"
@@ -147,68 +153,39 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
                 </th>
                 <td class="px-4 py-3">{{item.email}}</td>
                 <td class="px-4 py-3">{{item.phoneNumber}}</td>
-                <td class="px-4 py-3">{{item.birthYear}}</td>
+                <td class="px-4 py-3">{{currentYear - item.birthYear}}</td>
                 <td class="px-4 py-3 text-center">
-                  <i v-if="item.BusinessRegStatus == '1'" class="fa-solid fa-check"></i>
-                  <i v-if="item.BusinessRegStatus == '0'" class="fa-solid fa-xmark"></i>
+                  <i v-if="item.BusinessRegStatus == '1'" class="fa-solid fa-check text-green-600"></i>
+                  <i v-if="item.BusinessRegStatus == '0'" class="fa-solid fa-xmark text-red-600"></i>
                 </td>
+                <td class="px-4 py-3 text-center">
+                  <span>
+                    <i v-if="item.hasBusiInfo == '1'" class="fa-solid fa-check text-green-600"></i>
+                    <i v-else class="fa-solid fa-xmark text-red-600"></i>
+                  </span>
+                  <span>
+                    <i v-if="item.hasCompInfo == '1'" class="fa-solid fa-check text-green-600"></i>
+                    <i v-else class="fa-solid fa-xmark text-red-600"></i>
+                  </span>
+                  <span>
+                    <i v-if="item.hasProjInfo == '1'" class="fa-solid fa-check text-green-600"></i>
+                    <i v-else class="fa-solid fa-xmark text-red-600"></i>
+                  </span>
+                </td>
+                <td class="px-4 py-3"><small class="">{{`${item.createdDate} - ${item.createdTime}`}}</small></td>
                 <td class="px-4 py-3 flex items-center justify-end">
-                  <button
-                    id="apple-imac-27-dropdown-button"
-                    data-dropdown-toggle="apple-imac-27-dropdown"
-                    class="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                    type="button"
-                  >
-                    <svg
-                      class="w-5 h-5"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewbox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"
-                      />
-                    </svg>
-                  </button>
-                  <div
-                    id="apple-imac-27-dropdown"
-                    class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                  >
-                    <ul
-                      class="py-1 text-sm text-gray-700 dark:text-gray-200"
-                      aria-labelledby="apple-imac-27-dropdown-button"
-                    >
-                      <li>
-                        <a
-                          href="#"
-                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >Show</a
-                        >
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                          >Edit</a
-                        >
-                      </li>
-                    </ul>
-                    <div class="py-1">
-                      <a
-                        href="#"
-                        class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                        >Delete</a
-                      >
-                    </div>
-                  </div>
+                  <nuxt-link class="inline-flex items-center p-1.5 text-sm font-medium text-center bg-sky-400 text-white 
+                    hover:text-gray-800 rounded-lg focus:outline-none"
+                    :to="`/crm/admin/sido/application-${item.id}`"
+                    >open <i class="fa-solid fa-arrow-up-right-from-square mx-1"></i></nuxt-link>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
         <nav
-          class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4 bg-teal-50"
+          class="flex flex-col md:flex-row justify-between items-start md:items-center 
+          space-y-3 md:space-y-0 p-4 bg-teal-50"
           aria-label="Table navigation"
         >
           <span class="text-sm font-normal text-gray-500 ">
@@ -225,7 +202,9 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white 
+                rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700
+                "
               >
                 <span class="sr-only">Previous</span>
                 <svg
@@ -246,14 +225,17 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 
+                bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 "
                 >1</a
               >
             </li>
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center text-sm py-2 px-3 leading-tight
+                 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 
+                 hover:text-gray-700 "
                 >2</a
               >
             </li>
@@ -261,28 +243,34 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
               <a
                 href="#"
                 aria-current="page"
-                class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+                class="flex items-center justify-center text-sm z-10 py-2 px-3 leading-tight 
+                text-primary-600 bg-primary-50 border border-primary-300 hover:bg-primary-100 hover:text-primary-700 "
                 >3</a
               >
             </li>
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center text-sm py-2 px-3 leading-tight 
+                text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
                 >...</a
               >
             </li>
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 
+                bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800
+                 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                 >100</a
               >
             </li>
             <li>
               <a
                 href="#"
-                class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white 
+                rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 
+                dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
               >
                 <span class="sr-only">Next</span>
                 <svg

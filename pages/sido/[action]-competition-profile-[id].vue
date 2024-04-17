@@ -58,7 +58,6 @@ const verifyPlease = ()=>{
 <section class="contact-area">
     <div class="container">
         <progress-bar stage1="complete" stage2="complete"  stage3="current"/>
-         <loading-bars v-if="appData.isloading" />
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
                 <div class="contact-form">

@@ -99,12 +99,9 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     //Fetch Applicant Store
     async function  retriveApplicantProfiles() {
       const {data} = await useApiFetch(`/api/retrieve-applicant-profiles`);
-      // console.log(data.value);
-      
       if(data){
         allApplicants.value = data.value as ApplicantInfo[]
       }
-
     }
 
     return { 

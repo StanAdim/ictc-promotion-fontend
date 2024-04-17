@@ -5,15 +5,16 @@ const appData = useAppDataStore()
 </script>
 
 <template>
-  <div>
+  <div class=" h-fit bg-gray-50">
     <!-- Layout: default -->
     <page-header />
+    <usable-custom-spin-load v-if="appData.isloading" />
     <div class="absolute top-20 left-1/4 h-5" v-show="appData.showMessage">
       <toasting-tip :is-succeed="true" :message="appData.notificationMessage"/>
     </div>
-    <slot />
-    <page-footer/>
+    <slot v-if="!appData.isloading"  />
   </div>
+  <page-footer/>
 </template>
 
 <style >

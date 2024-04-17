@@ -1,6 +1,4 @@
 <template>
-<section class="about-area  section-bg">
-    <div class="container">
         <div class="row my-2">
             <div class="col-lg-6">
                 <div class="about-img">
@@ -48,6 +46,4 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
 </template>

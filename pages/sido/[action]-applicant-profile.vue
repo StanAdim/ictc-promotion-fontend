@@ -59,7 +59,6 @@ if(route.params.action == 'update' &&  applicantStore.applicantProfile){
 <section class="contact-area">
   <div class="container">
     <progress-bar stage1="current" />
-      <loading-bars v-if="appData.isloading" />
         <div class="row" v-if="!appData.isloading">
             <div class="col-lg-9">
                 <div class="contact-form">
