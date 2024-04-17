@@ -79,7 +79,7 @@ if(route.params.action == 'update' &&  applicantStore.applicantProfile){
                               </select>                            
                             </div>
                             <div class="col-md-6">
-                              <label for="nidaNumber">Nida Number</label>
+                              <label for="nidaNumber">NIDA Number</label>
                                 <input type="text" id="nidaNumber"
                                 v-model="formData.nidaNumber" placeholder="Your name">
                             </div>
