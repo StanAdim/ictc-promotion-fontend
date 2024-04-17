@@ -135,7 +135,7 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
                 <th scope="col" class="px-4 py-3">Phone</th>
                 <th scope="col" class="px-4 py-3">Age</th>
                 <th scope="col" class="px-4 py-3">Has Business</th>
-                <th scope="col" class="px-4 py-3">Stages 2 - 3 - 4 </th>
+                <th scope="col" class="px-4 py-3">Stages 1 - 2 - 3 - 4 </th>
                 <th scope="col" class="px-4 py-3">Applied On</th>
                 <th scope="col" class="px-4 py-3">Actions</th>
               </tr>
@@ -159,6 +159,9 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
                   <i v-if="item.BusinessRegStatus == '0'" class="fa-solid fa-xmark text-red-600"></i>
                 </td>
                 <td class="px-4 py-3 text-center">
+                  <span>
+                    <i  class="fa-solid fa-check text-green-600"></i>
+                  </span>
                   <span>
                     <i v-if="item.hasBusiInfo == '1'" class="fa-solid fa-check text-green-600"></i>
                     <i v-else class="fa-solid fa-xmark text-red-600"></i>
