@@ -52,8 +52,8 @@ await auth.login(formData.value)
                 <hr>
 
             </div>
-            <div class="pt-6 text-base font-semibold leading-7" v-if="appData.showMessage">
-                <p class="font-sans text-red-500 text-center hover:text-red-800">{{ appData.notificationMessage }}</p>
+            <div class="py-3 my-1 bg-red-100 rounded-lg text-base font-semibold leading-7" v-if="appData.showMessage">
+                <p class="font-sans  text-red-500 text-center hover:text-red-800">{{ appData.notificationMessage }}</p>
             </div>
         </form>
     </div>
