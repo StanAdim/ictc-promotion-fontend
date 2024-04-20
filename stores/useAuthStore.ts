@@ -3,34 +3,41 @@ type UserCredential = {
     password: string
 }
 type User = {
-    id: number,
-    name:string,
-    email: string,
+    message:string,
+    code: number,
+    token:string,
+    data: UserInfo
 }
 type UserInfo = {
+    id: number
     name: string,
     email: string,
-    password: string,
-    password_confirmation: string,
 }
 
 
 export const useAuthStore = defineStore('auth', () => {
-    const user = ref < User | null>(null)
-    const isLoggedIn = computed(() => !!user.value)
+    const loggedUser = ref < User | null>(null)
+    const isLoggedIn = computed(() => !!loggedUser.value)
     const userError = ref <any>(null)
-
+    const appData = useAppDataStore()
     //Fetch User
     async function fetchUser() {
-        const {data,error} = await useApiFetch('/api/user');
-        if(data.value){
-            user.value = data.value as User
+        if(process.client){
+            const {data,error} = await useApiFetch('/api/user',{
+                headers: {
+                    Authorization:  `Bearer ${window.localStorage.getItem('token') }`
+                }
+            });
+            if(data.value){
+                loggedUser.value = data.value as User
+            }
+            userError.value = error.value?.statusCode
+            // console.log(error)
+            return {
+                data,error
+            }
         }
-        userError.value = error.value?.statusCode
-        // console.log(error)
-        return {
-            data,error
-        }
+        
     }
     //Register User
     async function register(info: UserInfo){
@@ -45,22 +52,31 @@ export const useAuthStore = defineStore('auth', () => {
     }
     //Login User
     async function login(credentials: UserCredential){
-        await useApiFetch('/sanctum/csrf-cookie');
-        const loginResponse = await useApiFetch('/login',{
+         await useApiFetch('/sanctum/csrf-cookie');
+        const {data, error} = await useApiFetch('/api/auth-login',{
           method: 'POST',
           body: credentials as UserCredential
+          
         });
-        await fetchUser()
-        navigateTo('/auth/dashboard')
-        return loginResponse;
+        const responseData = data.value as User
+        if(responseData.code == 200){
+            loggedUser.value = data.value as User
+            localStorage.setItem('token',loggedUser.value?.token);
+            await fetchUser()
+        navigateTo('/crm/admin')
+       }
+        if(responseData.code == 300){
+            appData.AssignNotificationMessage(responseData.message)
+        navigateTo('/auth/login')
+       }
+        return {data , error};
     }
     async function logout(){
         await useApiFetch('/auth/logout',{
             method: 'POST'
         })
-        user.value = null
+        loggedUser.value = null
         navigateTo('/guest/login')
     }
-  
-    return { user, login, fetchUser, isLoggedIn, userError,logout,register }
+    return { loggedUser, login, fetchUser, isLoggedIn, userError,logout,register }
   })

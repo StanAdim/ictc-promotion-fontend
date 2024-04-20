@@ -1,6 +1,7 @@
 <script setup>
 definePageMeta({
-    layout: 'application'
+    layout: 'application',
+    middleware: 'auth'
 })
 //Single Application
 const singleApplication = ref(null);

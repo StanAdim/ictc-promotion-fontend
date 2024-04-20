@@ -1,4 +1,5 @@
 <template>
+        <custom-spin-load />
     <slot />
 </template>
 <style>

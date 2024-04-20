@@ -1,7 +1,8 @@
 <script setup>
 const config = useRuntimeConfig()
 definePageMeta({
-    layout:'application'
+    layout:'application',
+    middleware:'auth'
 })
 </script>
 

@@ -2,8 +2,14 @@
 definePageMeta({
     layout: 'guest'
 })
-const formData = ref({email : '', password: ''})
+const formData = useLocalStorage({email : '', password: ''},'LoginForm')
 const auth = useAuthStore()
+const appData = useAppDataStore()
+
+const token = ref('')
+if(process.client){
+    token.value = window.localStorage.getItem('token')
+}
 async function handleForm(){
   if(auth.isLoggedIn)return
 await auth.login(formData.value)
@@ -40,26 +46,14 @@ await auth.login(formData.value)
                         placeholder="Password" required/>
                 </div>
                 </div>
-                <!-- Remember Me checkbox -->
-                <!-- <div class="flex justify-center items-center mt-4">
-                    <p class="inline-flex items-center text-gray-700 font-medium text-xs text-center">
-                        <input type="checkbox" id="rememberMeCheckbox" name="rememberMe" class="mr-2">
-                        <span class="text-xs font-semibold">Remember me?</span>
-                    </p>
-                </div> -->
 
                 <button type="submit" value="login" id="login" 
                     class="mt-6 w-full shadow-xl bg-gradient-to-tr from-blue-600 to-red-400 hover:to-red-700 text-indigo-100 py-2 rounded-md text-lg tracking-wide transition duration-1000">Login</button>
                 <hr>
-                <!-- <div class="flex justify-center items-center mt-4">
-                    <p class="inline-flex items-center text-gray-700 font-medium text-xs text-center">
-                        <span class="ml-2">You don't have an account?<a href="#" class="text-xs ml-2 text-blue-500 font-semibold">Register now &rarr;</a>
-                        </span>
-                    </p>
-                </div> -->
+
             </div>
-            <div class="pt-6 text-base font-semibold leading-7">
-                <p class="font-sans text-red-500 text-md hover:text-red-800"></p>
+            <div class="pt-6 text-base font-semibold leading-7" v-if="appData.showMessage">
+                <p class="font-sans text-red-500 text-center hover:text-red-800">{{ appData.notificationMessage }}</p>
             </div>
         </form>
     </div>
