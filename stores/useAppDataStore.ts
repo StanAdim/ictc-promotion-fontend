@@ -43,7 +43,8 @@ export const useAppDataStore = defineStore('appData', () => {
       showMessage.value ? showMessage.value = false : showMessage.value = true
       setTimeout(function() {
         showMessage.value ? showMessage.value = false : showMessage.value = true
-      }, 5500);
+        notificationMessage.value = ''
+      }, 6500);
     }
     const AssignNotificationMessage = (message : string)=> {
       notificationMessage.value = message

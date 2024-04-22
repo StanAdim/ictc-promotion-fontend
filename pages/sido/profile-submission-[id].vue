@@ -13,6 +13,7 @@ const openCompetition = ref(true);
 const openProjection = ref(true);
 const  submittionButton = ref(false)
 
+
 const nowDate = new Date()
 
 function toogleAccordion() {
@@ -48,11 +49,15 @@ if(!application.value){
   await applicantStore.applicationBeforeSubmit(id)
   application.value = applicantStore.dataOnSubmitApplication
 }
+const verifyingSubmit = ref(false)
+const OpenSubmit = (key)=>{
+    verifyingSubmit.value = key;
+}
 </script>
 <template>
   <section class="dosoft-faq-section">
     <div class="container" >
-      <div class="row">
+      <div class="flex justify-center">
         <div class="col-lg-8 offset-lg-2">
           <div class="section-title mb-20 text-center">
             <h2>
@@ -67,16 +72,16 @@ if(!application.value){
         </div>
       </div>
 
-      <div class="row m-auto mb-4 bg-cyan-100">
+      <div class="flex justify-center m-auto mb-4 bg-cyan-100">
         <div class="col-lg-12" v-if="application">
           <div class="md:flex py-2">
             <ul
-              class="flex-column space-y space-y-4 text-sm font-medium dark:text-lime-900-400 md:me-4 mb-4 md:mb-0"
+              class="flex-column mx-2 space-y space-y-4 text-sm font-medium dark:text-lime-900-400 md:me-4 mb-4 md:mb-0"
             >
               <li @click.prevent="toogleAccordion()">
                 <a
                   href="#"
-                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50 dark:hover:bg-gray-700 dark:hover:text-white"
+                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50" :class="{'active':!openPersonal}"
                   aria-current="page"
                 >
                   Personal Profile
@@ -85,7 +90,7 @@ if(!application.value){
               <li @click.prevent="toogleAccordion2()">
                 <a
                   href="#"
-                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50 dark:hover:bg-gray-700 dark:hover:text-white"
+                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50" :class="{'active':!openBusiness}"
                 >
                   Business Details
                 </a>
@@ -93,7 +98,7 @@ if(!application.value){
               <li @click.prevent="toogleAccordion3()">
                 <a
                   href="#"
-                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50 dark:hover:bg-gray-700 dark:hover:text-white"
+                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50" :class="{'active':!openCompetition}"
                 >
                   Competitors Status
                 </a>
@@ -101,7 +106,7 @@ if(!application.value){
               <li @click.prevent="toogleAccordion4()">
                 <a
                   href="#"
-                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50 dark:hover:bg-gray-700 dark:hover:text-white"
+                  class="inline-flex items-center px-4 py-3 rounded-lg hover:text-gray-900 bg-gray-50 hover:bg-gray-100 w-full dark:bg-teal-50" :class="{'active':!openProjection}"
                 >
                   Business Projection
                 </a>
@@ -168,8 +173,20 @@ if(!application.value){
               <UsableParagraph key-name="Support Needed " :data="application?.data.projectionDetails.supportNeeded" />
             </div>
           </div>
-          <div class="m-2" v-if="submittionButton">
-            <button class="button-1" @click.prevent="applicantStore.submitApplication">Submit Application</button>
+          <button class="button-1" 
+          @click.prevent="OpenSubmit(true)" v-if="!verifyingSubmit && submittionButton">
+            Submit Application</button>
+          
+          <div class=" bg-slate-50 p-3 m-2 rounded" v-if="verifyingSubmit">
+            <span class="mt-4" v-if="submittionButton">
+              <div class=" bg-red-200 text-xl py-2 px-3 rounded-md my-2 text-center">Are you sure ?<i class="fa-solid fa-triangle-exclamation"></i></div>
+                  <span class="button-1" 
+                    @click.prevent="applicantStore.submitApplication(router.params.id)">
+                    YES<i class="fa-solid fa-check mx-0.5"></i></span>
+                  <span class="button-2" 
+                    @click.prevent="OpenSubmit(false)">
+                    NO<i class="fa-solid fa-xmark mx-0.5"></i></span>
+                </span>
           </div>
         </div>
       </div>
@@ -180,5 +197,8 @@ if(!application.value){
 <style scoped>
 .hide {
   @apply hidden;
+}
+.active {
+  @apply  dark:bg-gray-700 dark:text-white
 }
 </style>

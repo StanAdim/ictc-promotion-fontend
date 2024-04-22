@@ -1,20 +1,35 @@
 <script setup>
+
 const appData = useAppDataStore()
 const dataForm = ref({
     searchInput: ''
 })
+const searchMessage = ref('Application Not Found')
+const hasMessage = ref(false)
 const applicantStore = useApplicantStore()
 async function handleSearch (){
+    searchMessage.value = ''
     if(dataForm.value.searchInput != ''){
-        await applicantStore.captureApplication(dataForm.value.searchInput)
+   const    {data} =  await applicantStore.captureApplication(dataForm.value.searchInput)
+   if(data.value){
+        hasMessage.value = true
+    //    searchMessage.value = data.value?.message
+       console.log(`Returne: `,data.value?.message);
+   }
     }
-    appData.AssignNotificationMessage('Application Code: Required')
+    hasMessage.value = true
+    searchMessage.value = 'Application Code: Required';
     return
 }
 </script> 
 <template>
-    <form @submit.prevent="handleSearch">
-        <div class="search-wrapper active">
+    <template v-if="hasMessage">
+        <div class="flex justify-center">
+            <div class="bg-red-200 text-gray-800 text-l text-center px-4 py-0.5 rounded-sm">{{ searchMessage }}</div>
+        </div>
+    </template>
+    <form @submit.prevent="handleSearch" class="flex justify-center">
+        <div class="search-wrapper active my-3">
             <div class="input-holder ">
                 <input type="text" class="search-input" v-model="dataForm.searchInput" placeholder="Your Code" />
                 <button class="search-icon" type="submit"><i class="fa-solid deadline fa-magnifying-glass fa-2xl"></i></button>
@@ -23,8 +38,6 @@ async function handleSearch (){
     </form>
 </template>
 <style>
-
-
 .search-wrapper .input-holder {    
     height: 70px;
     width:70px;
@@ -35,7 +48,7 @@ async function handleSearch (){
     transition: all 0.3s ease-in-out;
 }
 .search-wrapper.active .input-holder {
-    width:400px;
+    width:320px;
     border-radius: 50px;
     background: #38bedf43;
     transition: all .5s cubic-bezier(0.000, 0.105, 0.035, 1.570);

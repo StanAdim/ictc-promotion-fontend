@@ -73,11 +73,6 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     }
     return {data , error, refresh}
     }
-    async function submitApplication() {
-      console.log(`submitApplication`);
-      
-      return 123;
-    } 
     async function captureApplication(applicationKey:string) {      
       appData.toogleLoading()
       const {data} = await useApiFetch(`/api/get-applicant-details/code-${applicationKey}`)
@@ -87,13 +82,14 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         const action = ref('update')
         const message = ref('')
         if(applicantProfile.value.code == 300){
-          appData.AssignNotificationMessage(applicantProfile.value.message)
-          return
+          message.value = applicantProfile.value.message
+          return {data, message}
         }
+
         message.value = `${applicantProfile.value.message}`
         appData.AssignNotificationMessage(message.value)
         navigateTo(`/sido/${action.value}-applicant-profile`)
-        return { data }
+        return { data, message}
       }
     }
     //Fetch Applicant Store
@@ -103,6 +99,14 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         allApplicants.value = data.value as ApplicantInfo[]
       }
     }
+
+    async function submitApplication(applicationKey:string) {
+      //Change application status
+      console.log(applicantProfile);
+      
+      navigateTo(`/sido/finalize-application`)
+      return;
+    } 
 
     return { 
       applicantProfile, dataOnSubmitApplication, 

@@ -22,8 +22,8 @@ const businessPlanSections = [
     "At least one year business and technical comprehensive milestones."
 ];
 const appData = useAppDataStore()
-const verifyPlease = ()=>{
-  appData.setSidoUpdateForm(true);
+const verifyPlease = (key:boolean)=>{
+  appData.setSidoUpdateForm(key);
   }
 </script>
 
@@ -31,7 +31,7 @@ const verifyPlease = ()=>{
 
   <section class="awesome-features ">
     <div class="container">
-      <div class="row">
+      <div class="flex justify-center">
         <div class="col-lg-8">
           <div class="section-title text-center">
             <h2 v-if="!appData.showSidoUpdateForm">Programme Admission Criteria</h2>
@@ -44,8 +44,11 @@ const verifyPlease = ()=>{
       </div>
       <div class="row justify-content-center">
         <loading-bars v-if="appData.isloading" />
-        <div class="my-5 mx-2" v-if="appData.showSidoUpdateForm">
+        <div class="my-5 mx-2 justify-evenly" v-if="appData.showSidoUpdateForm">
           <usable-search-input />
+          <div class="bg-red-400 h-16 w-16 mx-auto text-center p-2 text-5xl hover:text-white hover:bg-red-500 hover:border rounded-full text-slate-100" 
+                    @click.prevent="verifyPlease(false)">
+                    <i class="fa-solid fa-xmark mx-0.5"></i></div>
         </div>
         <div class="col-md-10 my-2 bg" v-if="!appData.showSidoUpdateForm">    
           <ul class="space-y-2 text-left text-gray-700 ">
@@ -58,7 +61,7 @@ const verifyPlease = ()=>{
           </ul>
           <div class="hero-btn mt-30">
             <nuxt-link to="/sido/create-applicant-profile" class="button-1">Start now</nuxt-link>
-            <button class="button-1" v-if="!appData.showSidoUpdateForm" @click="verifyPlease()" >Update</button>
+            <button class="button-1" v-if="!appData.showSidoUpdateForm" @click="verifyPlease(true)" >Update</button>
           </div>
         </div>
       </div>
