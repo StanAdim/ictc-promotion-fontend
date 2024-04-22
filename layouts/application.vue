@@ -29,4 +29,8 @@ const currentYear = new Date().getFullYear();
 .pageHeading{
   @apply w-full bg-sky-300  h-12 py-2 flex flex-wrap justify-between md:flex-row
 }
+.deadline{
+    color:#ff7a7a;
+    font-weight: 600;
+}
 </style>

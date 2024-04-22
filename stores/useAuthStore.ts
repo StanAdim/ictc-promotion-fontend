@@ -61,6 +61,7 @@ export const useAuthStore = defineStore('auth', () => {
         const responseData = data.value as User
         if(responseData.code == 200){
             loggedUser.value = data.value as User
+            appData.AssignNotificationMessage(loggedUser.value.message);
             localStorage.setItem('token',loggedUser.value?.token);
             await fetchUser()
         navigateTo('/crm/admin')
@@ -72,11 +73,15 @@ export const useAuthStore = defineStore('auth', () => {
         return {data , error};
     }
     async function logout(){
-        await useApiFetch('/auth/logout',{
-            method: 'POST'
-        })
+        if(process.client){
+                    await useApiFetch('/api/auth/log-user-out',{method: 'POST',
+        headers: {
+            Authorization:  `Bearer ${window.localStorage.getItem('token') }`
+        }
+         })
+        }
         loggedUser.value = null
-        navigateTo('/guest/login')
+        navigateTo('/auth/login')
     }
     return { loggedUser, login, fetchUser, isLoggedIn, userError,logout,register }
   })

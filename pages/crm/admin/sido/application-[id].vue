@@ -80,5 +80,8 @@ retriveData()
     </div>
 </template>
 <style>
-
+.deadline{
+    color:#ff7a7a;
+    font-weight: 600;
+}
 </style>

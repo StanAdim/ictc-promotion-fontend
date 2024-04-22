@@ -14,3 +14,9 @@ defineProps({
     <hr class=" py-0.5 bg-rose-200" />
 </template>
 </template>
+<style scoped>
+.deadline{
+    color:#ff7a7a;
+    font-weight: 600;
+}
+</style>
