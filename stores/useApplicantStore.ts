@@ -24,7 +24,11 @@ type Application = {
   data:{
   }
 }
-
+type Response = {
+  message: string,
+  data: object,
+  code: number
+}
 export const useApplicantStore = defineStore('applicantStore', () => {
     const applicantProfile = ref < ApplicantProfile | null>(null)
     const allApplicants = ref <any>([]);
@@ -55,7 +59,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
           }
           else{
             appData.toogleLoading()
-            if( error.value?.data) saveError.value = error.value?.data.errors
+            if( error.value?.data) saveError.value = error.value?.data.errors            
         }
         return {data, error};
     }
@@ -99,12 +103,16 @@ export const useApplicantStore = defineStore('applicantStore', () => {
         allApplicants.value = data.value as ApplicantInfo[]
       }
     }
-
+    
     async function submitApplication(applicationKey:string) {
       //Change application status
-      console.log(applicantProfile);
+      const {data} = await useApiFetch(`/api/application-submission/${applicationKey}`);
+      const response = data.value as Response;
+      if(response.code  == 200){
+        appData.AssignNotificationMessage(response.message)
+        navigateTo(`/sido/finalize-application`)
+      }
       
-      navigateTo(`/sido/finalize-application`)
       return;
     } 
 

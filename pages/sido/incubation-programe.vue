@@ -43,7 +43,6 @@ const verifyPlease = (key:boolean)=>{
         </div>
       </div>
       <div class="row justify-content-center">
-        <loading-bars v-if="appData.isloading" />
         <div class="my-5 mx-2 justify-evenly" v-if="appData.showSidoUpdateForm">
           <usable-search-input />
           <div class="bg-red-400 h-16 w-16 mx-auto text-center p-2 text-5xl hover:text-white hover:bg-red-500 hover:border rounded-full text-slate-100" 

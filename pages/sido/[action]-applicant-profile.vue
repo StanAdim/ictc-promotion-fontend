@@ -7,7 +7,7 @@ useHead({
   title:'Applicant profile'
 })
 const route = useRoute() 
-const formData = ref({
+const formData = useLocalStorage({
   action: route.params.action,
   fullName: '',
   birthYear: 'none',
@@ -32,6 +32,7 @@ const  handleForm = async ()=> {
   if(applicantStore.saveError){
     hasError.value = true
     validationError.value = applicantStore.saveError
+    console.log(validationError.value);
   }
   else{
     validationError.value = null
@@ -53,13 +54,13 @@ if(route.params.action == 'update' &&  applicantStore.applicantProfile){
 <!-- Start  Form -->
 <div class="absolute top-10 left-5">
   <template v-if="hasError">
-      <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="!hasError"/>
+    <toasting-tip :message=" error[0]" v-for="error in validationError" :key="error" :is-failed="hasError" :is-succeed="!hasError"/>
   </template>
 </div>
 <section class="contact-area">
   <div class="container">
     <progress-bar stage1="current" />
-        <div class="row" v-if="!appData.isloading">
+        <div class="flex justify-center" v-if="!appData.isloading">
             <div class="col-lg-9">
                 <div class="contact-form">
                     <h2>Applicant Personal Profile <i class="fa-solid fa-address-card"></i></h2>

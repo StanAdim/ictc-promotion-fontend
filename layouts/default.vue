@@ -12,7 +12,7 @@ const appData = useAppDataStore()
     <div class="absolute top-20 left-1/4 h-5" v-show="appData.showMessage">
       <toasting-tip :is-succeed="true" :message="appData.notificationMessage"/>
     </div>
-    <slot v-if="!appData.isloading"  />
+    <slot   />
   </div>
   <page-footer/>
 </template>

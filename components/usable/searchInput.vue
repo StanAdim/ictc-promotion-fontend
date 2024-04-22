@@ -4,28 +4,28 @@ const appData = useAppDataStore()
 const dataForm = ref({
     searchInput: ''
 })
-const searchMessage = ref('Application Not Found')
+const searchMessage = ref('')
 const hasMessage = ref(false)
 const applicantStore = useApplicantStore()
 async function handleSearch (){
     searchMessage.value = ''
     if(dataForm.value.searchInput != ''){
-   const    {data} =  await applicantStore.captureApplication(dataForm.value.searchInput)
-   if(data.value){
-        hasMessage.value = true
-    //    searchMessage.value = data.value?.message
-       console.log(`Returne: `,data.value?.message);
-   }
+    const    {data} =  await applicantStore.captureApplication(dataForm.value.searchInput)
+    hasMessage.value = true
+    searchMessage.value = data.value?.message
+    console.log(`Returne: `,data.value?.message);
     }
     hasMessage.value = true
-    searchMessage.value = 'Application Code: Required';
+    // searchMessage.value = 'Application Code: Required';
     return
 }
 </script> 
 <template>
     <template v-if="hasMessage">
         <div class="flex justify-center">
-            <div class="bg-red-200 text-gray-800 text-l text-center px-4 py-0.5 rounded-sm">{{ searchMessage }}</div>
+            <div class="bg-red-200 text-gray-800 text-l text-center px-4 py-0.5 rounded-sm"><i class="fa-solid fa-triangle-exclamation mx-1"></i>{{ searchMessage }}
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
         </div>
     </template>
     <form @submit.prevent="handleSearch" class="flex justify-center">

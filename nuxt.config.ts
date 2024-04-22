@@ -4,8 +4,6 @@ export default defineNuxtConfig({
   modules: [
     '@pinia/nuxt',
     '@nuxtjs/tailwindcss',
-    // '@ant-design-vue',
-    
   ],
   app: {
     head: {
@@ -30,7 +28,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig:{
     public:{
-      appName:  'ICTC Innovation',
+      appName:  'ICT Innovation',
       // apiBaseUlr: process.env.BASE_URL || 'http://41.59.225.216:3050/public',
       apiBaseUlr: process.env.API_URL,
       baseUrl: process.env.BASE_URL,
