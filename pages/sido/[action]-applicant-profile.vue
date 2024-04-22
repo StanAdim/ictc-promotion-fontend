@@ -7,7 +7,7 @@ useHead({
   title:'Applicant profile'
 })
 const route = useRoute() 
-const formData = useLocalStorage({
+const formData = ref({
   action: route.params.action,
   fullName: '',
   birthYear: 'none',
@@ -27,6 +27,7 @@ const applicantStore = useApplicantStore()
 
 // handle the form
 const  handleForm = async ()=> {
+  formData.value.action = route.params.action
   showSaveBtn.value = false;
    await applicantStore.createApplicantProfile(formData.value)
   if(applicantStore.saveError){
