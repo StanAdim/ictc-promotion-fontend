@@ -44,7 +44,7 @@ const appData = useAppDataStore()
                     </div>
                     <div class="col-lg-6">
                         <div class="hero-img">
-                            <img src="assets/img/banner-image-2.png" alt="hero-img">
+                            <img src="/assets/img/incubation3.jpg" alt="hero-img">
                         </div>
                     </div>
                 </div>
