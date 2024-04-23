@@ -31,7 +31,7 @@ async function handleSearch (){
     <form @submit.prevent="handleSearch" class="flex justify-center">
         <div class="search-wrapper active my-3">
             <div class="input-holder ">
-                <input type="text" class="search-input" v-model="dataForm.searchInput" placeholder="Your Code" />
+                <input type="text" class="search-input" v-model.trim="dataForm.searchInput" placeholder="Your Code" />
                 <button class="search-icon" type="submit"><i class="fa-solid deadline fa-magnifying-glass fa-2xl"></i></button>
             </div>
         </div>
