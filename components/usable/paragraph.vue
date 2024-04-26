@@ -16,7 +16,7 @@ defineProps({
 </template>
 <style scoped>
 .deadline{
-    color:#ff7a7a;
+    color:#29bcf1;
     font-weight: 600;
 }
 </style>
