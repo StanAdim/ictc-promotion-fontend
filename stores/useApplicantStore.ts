@@ -116,11 +116,26 @@ export const useApplicantStore = defineStore('applicantStore', () => {
       return;
     } 
 
+    async function handleSearchByName (seachKey: string){
+            //Search application In admin
+            appData.toogleLoading()
+            const {data} = await useApiFetch(`/api/application-search-by-name/${seachKey}`);
+            const response = data.value as Response;
+            if(response.code  == 200){
+              appData.AssignNotificationMessage(response.message)
+              appData.toogleLoading()
+        return response.data
+
+      }
+    }
+
+
     return { 
       applicantProfile, dataOnSubmitApplication, 
       submitApplication,captureApplication, 
       saveError , createApplicantProfile, 
       retriveApplicantProfiles,allApplicants,
-      applicationBeforeSubmit
+      applicationBeforeSubmit,
+      handleSearchByName,
     }
   })

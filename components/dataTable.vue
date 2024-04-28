@@ -3,7 +3,9 @@ const hideFilterOption = ref(true)
 const hideActionOption = ref(true)
 const hideInfo = ref(true)
 const currentYear = new Date().getFullYear();
-
+const formData = ref({
+  searchKey: ''
+})
 const applicantStore = useApplicantStore()
 const tableData = ref(null);
 if(!tableData.value){
@@ -14,7 +16,17 @@ if(!tableData.value){
 }
 const toogleActionOption = ()=> {hideActionOption.value = !hideActionOption.value; hideFilterOption.value = true}
 const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.value; hideActionOption.value = true}
+// ----------Seach Table Data
+  const handleSearching = async ()=>{
+    if(formData.value.searchKey != ''){
+      const searchResult = await applicantStore.handleSearchByName(formData.value.searchKey)
+      tableData.value = searchResult
+    }
+    else{
+      tableData.value = applicantStore.allApplicants.data
 
+    }
+}
 
 </script>
 <template>
@@ -26,15 +38,17 @@ const toogleFilterOption = ()=> {hideFilterOption.value = !hideFilterOption.valu
         <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4 bg-teal-50">
             <!-- Search Input -->
           <div class="w-full md:w-1/2">
-            <form class="flex items-center">
+            <form class="flex items-center" @submit.prevent="">
               <label for="simple-search" class="sr-only">Search</label>
               <div class="relative w-full">
                 <input
                   type="text"
                   id="simple-search"
+                  @change="handleSearching"
+                  v-model="formData.searchKey"
                   class="bg-gray-50 border border-gray-600 text-gray-900 text-sm 
                   rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2"
-                  placeholder="Search"
+                  placeholder="Search Name"
                 />
               </div>
             </form>
