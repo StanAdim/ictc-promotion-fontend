@@ -65,7 +65,7 @@ export const useApplicantStore = defineStore('applicantStore', () => {
     }
     async function applicationBeforeSubmit (uuid :string){
       appData.toogleLoading()
-      const {data, error, refresh} = useApiFetch(`/api/application-before-submission/${uuid}`)
+      const {data, error, refresh} = await useApiFetch(`/api/application-before-submission/${uuid}`)
       if(data.value){
         appData.toogleLoading()
         dataOnSubmitApplication.value = data.value as Application
@@ -129,13 +129,24 @@ export const useApplicantStore = defineStore('applicantStore', () => {
       }
     }
 
-
+    async function downloadApplication (uuid :string){
+        appData.toogleLoading()
+        const {data} = await useApiFetch(`/api/application-download/${uuid}`)
+        if(data.value){
+            appData.toogleLoading()
+            saveError.value = null
+        }
+        else{
+            appData.toogleLoading()
+        }
+        return {data}
+    }
     return { 
       applicantProfile, dataOnSubmitApplication, 
       submitApplication,captureApplication, 
       saveError , createApplicantProfile, 
       retriveApplicantProfiles,allApplicants,
       applicationBeforeSubmit,
-      handleSearchByName,
+      handleSearchByName, downloadApplication,
     }
   })

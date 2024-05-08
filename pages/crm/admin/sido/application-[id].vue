@@ -14,9 +14,22 @@ const retriveData = async ()=>{
         await applicantStore.applicationBeforeSubmit(route.params.id)
         singleApplication.value = applicantStore.dataOnSubmitApplication?.data
         // console.log(singleApplication.value);
-    }   
+    }
+}
+const pdfData = ref(null);
+const  handleApplicationDownload = async (passedId)=>{
+  try {
+    const response = await applicantStore.downloadApplication(passedId)
+    console.log(response);
+
+    const blob = new Blob([response.data.value], { type: 'application/pdf' });
+    pdfData.value = URL.createObjectURL(blob);
+  } catch (error) {
+    console.error('Error fetching PDF:', error);
+  }
 }
 retriveData()
+
 </script>
 <template>
     <div class="flex justify-center">
@@ -25,11 +38,16 @@ retriveData()
                 <div class="grid grid-cols-3 ">
                     <div><nuxt-link to="/crm/admin/sido" class="bg-sky-200 rounded-full px-3 py-2"><i class="fa-solid fa-arrow-left-long mx-2"></i></nuxt-link></div>
                     <div><p class="text-2xl font-bold text-gray-900 ">{{singleApplication?.fullName}}</p></div>
-                    <div><button @click="retriveData()" class="bg-sky-200 rounded-full px-3 py-1 mx-4"><i class="fa-solid fa-rotate mx-1"></i></button></div>
+                    <div>
+                      <button @click="retriveData()" class="bg-sky-200 rounded-full px-3 py-1 mx-4"><i class="fa-solid fa-rotate mx-1"></i></button>
+                      <button @click="handleApplicationDownload(route.params.id)" class="bg-sky-200 rounded-full px-3 py-1 mx-4"><i class="fa-solid fa-download mx-1"></i></button>
+                    </div>
                 </div>
             </div>
-        <div class="flex flex-row justify-evenly my-4" v-if="singleApplication">
-            <div class="p-2 w-2/5">            
+          <embed class="my-1.5" v-if="pdfData" :src="pdfData" type="application/pdf" width="100%" height="600px" />
+
+          <div class="flex flex-row justify-evenly my-4" v-if="singleApplication">
+            <div class="p-2 w-2/5">
                 <p class="text-lg font-bold text-gray-900 mb-2">Personal Details</p>
                 <UsableParagraph key-name="Application Code" :data="singleApplication?.applicationCode" :has-hr="false" />
                 <UsableParagraph key-name="Name" :data="singleApplication?.fullName" :has-hr="false" />
@@ -43,7 +61,7 @@ retriveData()
             </div>
             <div class="p-2">
                 <p class="text-lg font-bold text-gray-900 mb-2">Business Details</p>
-                <template v-if="singleApplication.BusinessRegStatus != '0' ">
+                <template v-if="singleApplication.BusinessRegStatus !== '0' ">
                 <UsableParagraph key-name="Business Name" :data="singleApplication?.businessName" :has-hr="false" />
                 <UsableParagraph key-name="Business Sector" :data="singleApplication?.businessSector" :has-hr="false" />
                 <UsableParagraph key-name="Business Location" :data="singleApplication?.businessLocation" :has-hr="true" />
@@ -83,5 +101,5 @@ retriveData()
 .deadline{
     color:#ff7a7a;
     font-weight: 600;
-}
+    }
 </style>
